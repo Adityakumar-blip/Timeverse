@@ -1,20 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Dimensions, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {useTheme} from '../../utils/ThemeContext'; // Make sure to import the useTheme hook
 
 const CalendarComponent = () => {
-  const [selected, setSelected] = useState('');
+  const {theme, isDarkMode} = useTheme(); // Use the global theme
+  const [selected, setSelected] = React.useState('');
 
   const renderCustomHeader = date => {
     const month = date.toString('MMMM');
     const year = date.getFullYear();
     const textStyle = {
-      fontSize: 18,
-      fontWeight: 'bold',
-      paddingTop: 10,
-      paddingBottom: 10,
-      color: '#5E60CE',
-      paddingRight: 5,
+      fontSize: theme.typography.h5.fontSize,
+      fontWeight: theme.fontWeights.supreme.bold,
+      paddingTop: theme.spacing['4S'],
+      paddingBottom: theme.spacing['4S'],
+      color: theme.colors.primary,
+      paddingRight: theme.spacing['3XS'],
     };
 
     return (
@@ -28,8 +30,34 @@ const CalendarComponent = () => {
   const onDayPress = day => {
     setSelected(day.dateString);
   };
+
+  const calendarTheme = {
+    backgroundColor: theme.colors.background,
+    calendarBackground: theme.colors.background,
+    textSectionTitleColor: theme.colors.coolGrey[7],
+    selectedDayBackgroundColor: theme.colors.primary,
+    selectedDayTextColor: theme.colors.background,
+    todayTextColor: theme.colors.primary,
+    dayTextColor: isDarkMode
+      ? theme.colors.coolGrey[11]
+      : theme.colors.coolGrey[10],
+    textDisabledColor: theme.colors.coolGrey[6],
+    dotColor: theme.colors.primary,
+    selectedDotColor: theme.colors.background,
+    arrowColor: theme.colors.primary,
+    monthTextColor: theme.colors.primary,
+    indicatorColor: theme.colors.primary,
+    textDayFontWeight: theme.fontWeights.supreme.regular,
+    textMonthFontWeight: theme.fontWeights.supreme.bold,
+    textDayHeaderFontWeight: theme.fontWeights.supreme.regular,
+    textDayFontSize: theme.typography.paragraphM.fontSize,
+    textMonthFontSize: theme.typography.h5.fontSize,
+    textDayHeaderFontSize: theme.typography.paragraphS.fontSize,
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <CalendarList
         current={new Date().toISOString()}
         pastScrollRange={50}
@@ -38,8 +66,8 @@ const CalendarComponent = () => {
           [selected]: {
             selected: true,
             disableTouchEvent: true,
-            selectedColor: '#5E60CE',
-            selectedTextColor: 'white',
+            selectedColor: theme.colors.primary,
+            selectedTextColor: theme.colors.background,
           },
         }}
         scrollEnabled={true}
@@ -51,29 +79,11 @@ const CalendarComponent = () => {
         onVisibleMonthsChange={months => {
           console.log('now these months are visible', months);
         }}
-        theme={{
-          backgroundColor: '#ffffff',
-          calendarBackground: '#ffffff',
-          textSectionTitleColor: '#b6c1cd',
-          selectedDayBackgroundColor: '#5E60CE',
-          selectedDayTextColor: '#ffffff',
-          todayTextColor: '#5E60CE',
-          dayTextColor: '#2d4150',
-          textDisabledColor: '#d9e1e8',
-          dotColor: '#5E60CE',
-          selectedDotColor: '#ffffff',
-          arrowColor: '#5E60CE',
-          monthTextColor: '#5E60CE',
-          indicatorColor: '#5E60CE',
-          textDayFontWeight: '300',
-          textMonthFontWeight: 'bold',
-          textDayHeaderFontWeight: '300',
-          textDayFontSize: 16,
-          textMonthFontSize: 18,
-          textDayHeaderFontSize: 14,
-        }}
+        theme={calendarTheme}
         onDayPress={onDayPress}
-        // renderHeader={renderCustomHeader}
+        renderHeader={renderCustomHeader}
+        removeClippedSubviews={true}
+        windowSize={3}
       />
     </SafeAreaView>
   );
@@ -82,5 +92,16 @@ const CalendarComponent = () => {
 export default CalendarComponent;
 
 const styles = StyleSheet.create({
-  container: {height: '100%', backgroundColor: '#FFF'},
+  container: {
+    height: '100%',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  monthText: {
+    marginRight: 5,
+  },
+  yearText: {},
 });

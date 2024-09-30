@@ -1,10 +1,8 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {WeekCalendar} from 'react-native-calendars';
-import AgendaScreen from '../views/WeekView';
-import CalendarComponent from '../views/MonthView';
 import MainView from '../views/MainView';
+import ComponentView from '../views/ComponentView';
 
 export default function HomeScreen({navigation}) {
   const handleLogout = async () => {
@@ -14,13 +12,8 @@ export default function HomeScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to the Home Screen!</Text>
-      <View>
-        {/* <WeekCalendar /> */}
-        {/* <AgendaScreen /> */}
-        <MainView />
-      </View>
-      <Button title="Logout" onPress={handleLogout} />
+      {/* <MainView /> */}
+      <ComponentView />
     </View>
   );
 }
