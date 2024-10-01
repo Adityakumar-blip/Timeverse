@@ -1,21 +1,23 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import Input from '../components/Input';
+import {StyleSheet} from 'react-native';
 import {useTheme} from '../../utils/ThemeContext';
 import ButtonsSystem from '../components/ButtonsSystem';
 import InputField from '../components/Input';
+import ChipMatrix from '../components/ChipsSystem';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const ComponentView = () => {
   const [text, setText] = useState('');
   const {theme} = useTheme();
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <InputField placeholder="Default state" />
       <InputField placeholder="Error state" error />
       <InputField placeholder="Success state" success />
       <InputField placeholder="Disabled state" disabled />
       <ButtonsSystem />
-    </View>
+      <ChipMatrix />
+    </ScrollView>
   );
 };
 
