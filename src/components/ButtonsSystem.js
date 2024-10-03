@@ -9,12 +9,12 @@ const ButtonsSystem = () => {
   return (
     <View style={styles.container}>
       <Button
-        title="Primary Button"
+        title="CONTINUE"
         onPress={() => console.log('Primary pressed')}
         size="large"
       />
       <Button
-        title="Secondary Button"
+        title="CONTINUE"
         variant="secondary"
         onPress={() => console.log('Secondary pressed')}
         size="large"

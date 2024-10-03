@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/ClashGrotesk-Variable.ttf",
+      "sha1": "b4bc066de0bbd47f84baf5f90d9739e13819c4ac"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Variable.ttf",
+      "sha1": "65f88953549060f168a267f754ef472027a56523"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-VariableItalic.ttf",
+      "sha1": "b677275c02450ed0b6b2f1097706edae7b323126"
+    }
+  ]
+}

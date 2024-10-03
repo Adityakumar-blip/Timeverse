@@ -19,6 +19,12 @@ const baseTheme = {
     paragraphXS: {fontSize: 12, lineHeight: 20},
   },
 
+  // Font Families
+  fontFamily: {
+    CG: 'ClashGrotesk-variable',
+    SUP: 'Supreme-Variable',
+  },
+
   // Font Weights
   fontWeights: {
     clashGrotesk: {
