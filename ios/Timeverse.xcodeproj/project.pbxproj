@@ -14,9 +14,29 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-Timeverse-TimeverseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Timeverse-TimeverseTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		AC066769F575462FAD64398F /* ClashGrotesk-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF9E6EF34DB242F2899F511E /* ClashGrotesk-Variable.ttf */; };
-		9E000E2F51774E9289BD7C4A /* Supreme-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20E1A8C7C0864EEFBB4133A7 /* Supreme-Variable.ttf */; };
-		D565084BBF134ABC8D391A22 /* Supreme-VariableItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2885B0C255047F98295BE98 /* Supreme-VariableItalic.ttf */; };
+		23D79D3B498D4C708CB5E41F /* ClashGrotesk-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76A9B78665EE453D8B68B4CC /* ClashGrotesk-Variable.ttf */; };
+		3B9D65553B294D97970898AA /* Supreme-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D34EEB431BAD4133A7D4967E /* Supreme-Variable.ttf */; };
+		01F3FB0099E94414B42BE931 /* Supreme-VariableItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45C0620F271D47019AA6A1FD /* Supreme-VariableItalic.ttf */; };
+		C5EBD20C4FEA4CCBB830D95A /* ClashGrotesk-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A301A812F81641CA8A31839C /* ClashGrotesk-Bold.otf */; };
+		E7A76FF63A6547CEB652ACF4 /* ClashGrotesk-Extralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4DB5D39D07548C7A4FF3090 /* ClashGrotesk-Extralight.otf */; };
+		FD6874A28196493BA6260400 /* ClashGrotesk-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C16D2FABF6E440E4918E9656 /* ClashGrotesk-Light.otf */; };
+		191264EA5BA1494581354E76 /* ClashGrotesk-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A688A637C31C42C988BFB113 /* ClashGrotesk-Medium.otf */; };
+		6EC6E517E75643A29656FE12 /* ClashGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 64CBD67346104A259944A6C8 /* ClashGrotesk-Regular.otf */; };
+		67AF5EB7B5744FF6B7CC0785 /* ClashGrotesk-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 90FA4BFFB6FD4BDE9B1052BB /* ClashGrotesk-Semibold.otf */; };
+		2B54BACB643A421C842DDC42 /* Supreme-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F90130991D50448DBA2BD805 /* Supreme-Bold.otf */; };
+		F7100CAE63B745879C47FF3D /* Supreme-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5E40135F87814031922104E1 /* Supreme-BoldItalic.otf */; };
+		3C1F97BBCCD242A495D74512 /* Supreme-Extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5877D8D1324BCAAF7D28EA /* Supreme-Extrabold.otf */; };
+		3871EEB6ECAB47859A4E29B0 /* Supreme-ExtraboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 59CE5469171948C39E853806 /* Supreme-ExtraboldItalic.otf */; };
+		8E53DEE2753C44FA982DDCD9 /* Supreme-Extralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F6C00DE6161642A9A6A2E4F2 /* Supreme-Extralight.otf */; };
+		D52485B85C7044F2A9131AA5 /* Supreme-ExtralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A336D76055BD4A0F9ABFDD28 /* Supreme-ExtralightItalic.otf */; };
+		97E45EAB90F44B60867BD408 /* Supreme-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3677D6A7DCF344EB8F58C5F6 /* Supreme-Italic.otf */; };
+		8BA404EF0FBA4473BE5A7AED /* Supreme-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F9BA301627E0488EA86F3AC3 /* Supreme-Light.otf */; };
+		422B1F2BE9E446FA99AD542C /* Supreme-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = DFD60F02C5CA4BCFA5CD9EE1 /* Supreme-LightItalic.otf */; };
+		0DE75392FF974D08A3170992 /* Supreme-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A17BB0769C7F4B58970DF39D /* Supreme-Medium.otf */; };
+		F545CB70922D416985D2102B /* Supreme-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = FB2DBD978CB74D66BC828124 /* Supreme-MediumItalic.otf */; };
+		B53CF9E158B345BDA2AEEF89 /* Supreme-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B87E4A4F58D84760ABDE2934 /* Supreme-Regular.otf */; };
+		EC168A8B2C2C41F586BE3BF4 /* Supreme-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 33ED2206C5694609AC32541A /* Supreme-Thin.otf */; };
+		6E8FE67E98094CB0BFFBFD95 /* Supreme-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 09E27090C52E4AA29FFB65A7 /* Supreme-ThinItalic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +68,29 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Timeverse/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Timeverse-TimeverseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timeverse-TimeverseTests.release.xcconfig"; path = "Target Support Files/Pods-Timeverse-TimeverseTests/Pods-Timeverse-TimeverseTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		DF9E6EF34DB242F2899F511E /* ClashGrotesk-Variable.ttf */ = {isa = PBXFileReference; name = "ClashGrotesk-Variable.ttf"; path = "../src/assets/fonts/ClashGrotesk-Variable.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		20E1A8C7C0864EEFBB4133A7 /* Supreme-Variable.ttf */ = {isa = PBXFileReference; name = "Supreme-Variable.ttf"; path = "../src/assets/fonts/Supreme-Variable.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C2885B0C255047F98295BE98 /* Supreme-VariableItalic.ttf */ = {isa = PBXFileReference; name = "Supreme-VariableItalic.ttf"; path = "../src/assets/fonts/Supreme-VariableItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		76A9B78665EE453D8B68B4CC /* ClashGrotesk-Variable.ttf */ = {isa = PBXFileReference; name = "ClashGrotesk-Variable.ttf"; path = "../src/assets/fonts/ClashGrotesk-Variable.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D34EEB431BAD4133A7D4967E /* Supreme-Variable.ttf */ = {isa = PBXFileReference; name = "Supreme-Variable.ttf"; path = "../src/assets/fonts/Supreme-Variable.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		45C0620F271D47019AA6A1FD /* Supreme-VariableItalic.ttf */ = {isa = PBXFileReference; name = "Supreme-VariableItalic.ttf"; path = "../src/assets/fonts/Supreme-VariableItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A301A812F81641CA8A31839C /* ClashGrotesk-Bold.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Bold.otf"; path = "../src/assets/fonts/ClashGrotesk-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D4DB5D39D07548C7A4FF3090 /* ClashGrotesk-Extralight.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Extralight.otf"; path = "../src/assets/fonts/ClashGrotesk-Extralight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C16D2FABF6E440E4918E9656 /* ClashGrotesk-Light.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Light.otf"; path = "../src/assets/fonts/ClashGrotesk-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A688A637C31C42C988BFB113 /* ClashGrotesk-Medium.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Medium.otf"; path = "../src/assets/fonts/ClashGrotesk-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		64CBD67346104A259944A6C8 /* ClashGrotesk-Regular.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Regular.otf"; path = "../src/assets/fonts/ClashGrotesk-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		90FA4BFFB6FD4BDE9B1052BB /* ClashGrotesk-Semibold.otf */ = {isa = PBXFileReference; name = "ClashGrotesk-Semibold.otf"; path = "../src/assets/fonts/ClashGrotesk-Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F90130991D50448DBA2BD805 /* Supreme-Bold.otf */ = {isa = PBXFileReference; name = "Supreme-Bold.otf"; path = "../src/assets/fonts/Supreme-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5E40135F87814031922104E1 /* Supreme-BoldItalic.otf */ = {isa = PBXFileReference; name = "Supreme-BoldItalic.otf"; path = "../src/assets/fonts/Supreme-BoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3A5877D8D1324BCAAF7D28EA /* Supreme-Extrabold.otf */ = {isa = PBXFileReference; name = "Supreme-Extrabold.otf"; path = "../src/assets/fonts/Supreme-Extrabold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		59CE5469171948C39E853806 /* Supreme-ExtraboldItalic.otf */ = {isa = PBXFileReference; name = "Supreme-ExtraboldItalic.otf"; path = "../src/assets/fonts/Supreme-ExtraboldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F6C00DE6161642A9A6A2E4F2 /* Supreme-Extralight.otf */ = {isa = PBXFileReference; name = "Supreme-Extralight.otf"; path = "../src/assets/fonts/Supreme-Extralight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A336D76055BD4A0F9ABFDD28 /* Supreme-ExtralightItalic.otf */ = {isa = PBXFileReference; name = "Supreme-ExtralightItalic.otf"; path = "../src/assets/fonts/Supreme-ExtralightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3677D6A7DCF344EB8F58C5F6 /* Supreme-Italic.otf */ = {isa = PBXFileReference; name = "Supreme-Italic.otf"; path = "../src/assets/fonts/Supreme-Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F9BA301627E0488EA86F3AC3 /* Supreme-Light.otf */ = {isa = PBXFileReference; name = "Supreme-Light.otf"; path = "../src/assets/fonts/Supreme-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DFD60F02C5CA4BCFA5CD9EE1 /* Supreme-LightItalic.otf */ = {isa = PBXFileReference; name = "Supreme-LightItalic.otf"; path = "../src/assets/fonts/Supreme-LightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A17BB0769C7F4B58970DF39D /* Supreme-Medium.otf */ = {isa = PBXFileReference; name = "Supreme-Medium.otf"; path = "../src/assets/fonts/Supreme-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FB2DBD978CB74D66BC828124 /* Supreme-MediumItalic.otf */ = {isa = PBXFileReference; name = "Supreme-MediumItalic.otf"; path = "../src/assets/fonts/Supreme-MediumItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B87E4A4F58D84760ABDE2934 /* Supreme-Regular.otf */ = {isa = PBXFileReference; name = "Supreme-Regular.otf"; path = "../src/assets/fonts/Supreme-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		33ED2206C5694609AC32541A /* Supreme-Thin.otf */ = {isa = PBXFileReference; name = "Supreme-Thin.otf"; path = "../src/assets/fonts/Supreme-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		09E27090C52E4AA29FFB65A7 /* Supreme-ThinItalic.otf */ = {isa = PBXFileReference; name = "Supreme-ThinItalic.otf"; path = "../src/assets/fonts/Supreme-ThinItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +170,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
-				E1C003C0DDB24F84B3271910 /* Resources */,
+				30911524DFDC4B08BC5A446A /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -157,12 +197,32 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		E1C003C0DDB24F84B3271910 /* Resources */ = {
+		30911524DFDC4B08BC5A446A /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				DF9E6EF34DB242F2899F511E /* ClashGrotesk-Variable.ttf */,
-				20E1A8C7C0864EEFBB4133A7 /* Supreme-Variable.ttf */,
-				C2885B0C255047F98295BE98 /* Supreme-VariableItalic.ttf */,
+				76A9B78665EE453D8B68B4CC /* ClashGrotesk-Variable.ttf */,
+				D34EEB431BAD4133A7D4967E /* Supreme-Variable.ttf */,
+				45C0620F271D47019AA6A1FD /* Supreme-VariableItalic.ttf */,
+				A301A812F81641CA8A31839C /* ClashGrotesk-Bold.otf */,
+				D4DB5D39D07548C7A4FF3090 /* ClashGrotesk-Extralight.otf */,
+				C16D2FABF6E440E4918E9656 /* ClashGrotesk-Light.otf */,
+				A688A637C31C42C988BFB113 /* ClashGrotesk-Medium.otf */,
+				64CBD67346104A259944A6C8 /* ClashGrotesk-Regular.otf */,
+				90FA4BFFB6FD4BDE9B1052BB /* ClashGrotesk-Semibold.otf */,
+				F90130991D50448DBA2BD805 /* Supreme-Bold.otf */,
+				5E40135F87814031922104E1 /* Supreme-BoldItalic.otf */,
+				3A5877D8D1324BCAAF7D28EA /* Supreme-Extrabold.otf */,
+				59CE5469171948C39E853806 /* Supreme-ExtraboldItalic.otf */,
+				F6C00DE6161642A9A6A2E4F2 /* Supreme-Extralight.otf */,
+				A336D76055BD4A0F9ABFDD28 /* Supreme-ExtralightItalic.otf */,
+				3677D6A7DCF344EB8F58C5F6 /* Supreme-Italic.otf */,
+				F9BA301627E0488EA86F3AC3 /* Supreme-Light.otf */,
+				DFD60F02C5CA4BCFA5CD9EE1 /* Supreme-LightItalic.otf */,
+				A17BB0769C7F4B58970DF39D /* Supreme-Medium.otf */,
+				FB2DBD978CB74D66BC828124 /* Supreme-MediumItalic.otf */,
+				B87E4A4F58D84760ABDE2934 /* Supreme-Regular.otf */,
+				33ED2206C5694609AC32541A /* Supreme-Thin.otf */,
+				09E27090C52E4AA29FFB65A7 /* Supreme-ThinItalic.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -263,9 +323,29 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				AC066769F575462FAD64398F /* ClashGrotesk-Variable.ttf in Resources */,
-				9E000E2F51774E9289BD7C4A /* Supreme-Variable.ttf in Resources */,
-				D565084BBF134ABC8D391A22 /* Supreme-VariableItalic.ttf in Resources */,
+				23D79D3B498D4C708CB5E41F /* ClashGrotesk-Variable.ttf in Resources */,
+				3B9D65553B294D97970898AA /* Supreme-Variable.ttf in Resources */,
+				01F3FB0099E94414B42BE931 /* Supreme-VariableItalic.ttf in Resources */,
+				C5EBD20C4FEA4CCBB830D95A /* ClashGrotesk-Bold.otf in Resources */,
+				E7A76FF63A6547CEB652ACF4 /* ClashGrotesk-Extralight.otf in Resources */,
+				FD6874A28196493BA6260400 /* ClashGrotesk-Light.otf in Resources */,
+				191264EA5BA1494581354E76 /* ClashGrotesk-Medium.otf in Resources */,
+				6EC6E517E75643A29656FE12 /* ClashGrotesk-Regular.otf in Resources */,
+				67AF5EB7B5744FF6B7CC0785 /* ClashGrotesk-Semibold.otf in Resources */,
+				2B54BACB643A421C842DDC42 /* Supreme-Bold.otf in Resources */,
+				F7100CAE63B745879C47FF3D /* Supreme-BoldItalic.otf in Resources */,
+				3C1F97BBCCD242A495D74512 /* Supreme-Extrabold.otf in Resources */,
+				3871EEB6ECAB47859A4E29B0 /* Supreme-ExtraboldItalic.otf in Resources */,
+				8E53DEE2753C44FA982DDCD9 /* Supreme-Extralight.otf in Resources */,
+				D52485B85C7044F2A9131AA5 /* Supreme-ExtralightItalic.otf in Resources */,
+				97E45EAB90F44B60867BD408 /* Supreme-Italic.otf in Resources */,
+				8BA404EF0FBA4473BE5A7AED /* Supreme-Light.otf in Resources */,
+				422B1F2BE9E446FA99AD542C /* Supreme-LightItalic.otf in Resources */,
+				0DE75392FF974D08A3170992 /* Supreme-Medium.otf in Resources */,
+				F545CB70922D416985D2102B /* Supreme-MediumItalic.otf in Resources */,
+				B53CF9E158B345BDA2AEEF89 /* Supreme-Regular.otf in Resources */,
+				EC168A8B2C2C41F586BE3BF4 /* Supreme-Thin.otf in Resources */,
+				6E8FE67E98094CB0BFFBFD95 /* Supreme-ThinItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

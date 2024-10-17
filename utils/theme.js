@@ -41,6 +41,32 @@ const baseTheme = {
     },
   },
 
+  fontFamily: {
+    CG: 'ClashGrotesk-Variable',
+    CGEL: 'ClashGrotesk-Extralight',
+    CGL: 'ClashGrotesk-Light',
+    CGM: 'ClashGrotesk-Medium',
+    CGR: 'ClashGrotesk-Regular',
+    CGSB: 'ClashGrotesk-Semibold',
+    SUP: 'Supreme-Variable',
+    SUPBI: 'Supreme-BoldItalic',
+    SUPB: 'Supreme-Bold',
+    SUPEBI: 'Supreme-ExtraboldItalic',
+    SUPEB: 'Supreme-Extrabold',
+    SUPELI: 'Supreme-ExtralightItalic',
+    SUPEL: 'Supreme-Extralight',
+    SUPI: 'Supreme-Italic',
+    SUPLI: 'Supreme-LightItalic',
+    SUPL: 'Supreme-Light',
+    SUPMI: 'Supreme-MediumItalic',
+    SUPM: 'Supreme-Medium',
+    SUPRI: 'Supreme-RegularItalic',
+    SUPR: 'Supreme-Regular',
+    SUPTI: 'Supreme-ThinItalic',
+    SUPT: 'Supreme-Thin',
+    SUPVI: 'Supreme-VariableItalic',
+  },
+
   // Spacing
   spacing: {
     '1XXXS': 4,

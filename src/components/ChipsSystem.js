@@ -5,92 +5,112 @@ import Chip from './Chips';
 const ChipMatrix = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Timeverse Foundations</Text>
-      <Text style={styles.title}>Chip Matrix</Text>
-      <Text style={styles.subtitle}>
-        Make sure to follow all the design aspects like padding, spacing. Don't
-        forget to add t
-      </Text>
-
       <View style={styles.row}>
         <Text style={styles.columnHeader}>NORMAL</Text>
         <Text style={styles.columnHeader}>+ LEADING ICON</Text>
         <Text style={styles.columnHeader}>+ TRAILING ICON</Text>
       </View>
 
+      {/* default chips */}
       <View style={styles.chipRow}>
         <Chip label="Option" onPress={() => {}} />
-        <Chip label="Option" onPress={() => {}} leadingIcon="check" />
         <Chip
           label="Option"
           onPress={() => {}}
-          trailingIcon="arrow-drop-down"
+          leadingIcon="checkmark-circle"
+        />
+        <Chip
+          label="Option"
+          onPress={() => {}}
+          trailingIcon="keyboard-arrow-down"
         />
       </View>
-
-      <View style={styles.chipRow}>
-        <Chip label="Option" onPress={() => {}} variant="active" />
-        <Chip
-          label="Option"
-          onPress={() => {}}
-          leadingIcon="check"
-          variant="active"
-        />
-        <Chip
-          label="Option"
-          onPress={() => {}}
-          trailingIcon="arrow-drop-down"
-          variant="active"
-        />
-      </View>
-
       <View style={styles.chipRow}>
         <Chip label="Option" onPress={() => {}} shape="full" />
         <Chip
           label="Option"
           onPress={() => {}}
           shape="full"
-          leadingIcon="check"
+          leadingIcon="checkmark-circle"
         />
         <Chip
           label="Option"
           onPress={() => {}}
           shape="full"
-          trailingIcon="arrow-drop-down"
+          trailingIcon="keyboard-arrow-down"
         />
       </View>
 
+      {/* active chips */}
+      <View style={styles.chipRow}>
+        <Chip label="Option" onPress={() => {}} variant="active" />
+        <Chip
+          label="Option"
+          onPress={() => {}}
+          leadingIcon="checkmark-circle"
+          variant="active"
+        />
+        <Chip
+          label="Option"
+          onPress={() => {}}
+          trailingIcon="keyboard-arrow-down"
+          variant="active"
+        />
+      </View>
       <View style={styles.chipRow}>
         <Chip label="Option" onPress={() => {}} shape="full" variant="active" />
         <Chip
           label="Option"
           onPress={() => {}}
           shape="full"
-          leadingIcon="check"
+          leadingIcon="checkmark-circle"
           variant="active"
         />
         <Chip
           label="Option"
           onPress={() => {}}
           shape="full"
-          trailingIcon="arrow-drop-down"
+          trailingIcon="keyboard-arrow-down"
           variant="active"
         />
       </View>
 
+      {/* disable chips */}
       <View style={styles.chipRow}>
-        <Chip label="Option" onPress={() => {}} variant="dark" />
+        <Chip label="Option" onPress={() => {}} variant="disabled" />
         <Chip
           label="Option"
           onPress={() => {}}
-          variant="dark"
-          leadingIcon="check"
+          variant="disabled"
+          leadingIcon="checkmark-circle"
         />
         <Chip
           label="Option"
           onPress={() => {}}
-          variant="dark"
-          trailingIcon="arrow-drop-down"
+          variant="disabled"
+          trailingIcon="keyboard-arrow-down"
+        />
+      </View>
+      <View style={styles.chipRow}>
+        <Chip
+          label="Option"
+          onPress={() => {}}
+          variant="disabled"
+          shape="full"
+        />
+        <Chip
+          label="Option"
+          onPress={() => {}}
+          variant="disabled"
+          leadingIcon="checkmark-circle"
+          shape="full"
+        />
+        <Chip
+          label="Option"
+          onPress={() => {}}
+          variant="disabled"
+          trailingIcon="keyboard-arrow-down"
+          shape="full"
         />
       </View>
     </View>
@@ -100,7 +120,7 @@ const ChipMatrix = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    // backgroundColor: '#x',
     paddingTop: 20,
     paddingHorizontal: 16,
     paddingBottom: 20,
