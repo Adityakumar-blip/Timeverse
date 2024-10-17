@@ -1,4 +1,3 @@
-/* eslint-disable curly */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useRef, useState} from 'react';
 import {
@@ -9,13 +8,14 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient'; // Import LinearGradient
 import {useTheme} from '../../utils/ThemeContext';
 
-// Import your SVG strings
 import PrimarySvg from '../assets/svg/Pattern.svg';
-import SecondarySvg from '../assets/svg/Vector.svg';
-import SecondaryLight from '../assets/svg/Vector-light.svg';
-import PrimaryDark from '../assets/svg/Dark-Prime.svg';
+import SecondarySvg from '../assets/svg/SecondaryLight.svg';
+import SecondaryDark from '../assets/svg/SecondaryDark.svg';
+import PrimaryDark from '../assets/svg/PrimaryDark.svg';
+import RadialGradient from 'react-native-radial-gradient';
 
 const Button = ({
   title,
@@ -48,7 +48,7 @@ const Button = ({
     switch (variant) {
       case 'secondary':
         return isDarkMode ? (
-          <SecondarySvg style={styles.svg} />
+          <SecondaryDark style={styles.svg} />
         ) : (
           <SecondarySvg style={styles.svg} />
         );
@@ -56,7 +56,7 @@ const Button = ({
         return <SecondarySvg style={styles.svg} />;
       default:
         return isDarkMode ? (
-          <PrimarySvg style={styles.svg} />
+          <PrimaryDark style={styles.svg} />
         ) : (
           <PrimarySvg style={styles.svg} />
         );
@@ -72,11 +72,6 @@ const Button = ({
       default:
         return theme.colors.coolGrey[1];
     }
-  };
-
-  const getBorderColor = () => {
-    if (disabled) return theme.colors.coolGrey[5];
-    return variant === 'tertiary' ? theme.colors.coolGrey[4] : 'transparent';
   };
 
   const getButtonSize = () => {
@@ -103,7 +98,7 @@ const Button = ({
     Animated.spring(animatedScale, {
       toValue: 1,
       useNativeDriver: true,
-    }).start();
+    }).start(() => {});
   };
 
   const handlePress = () => {
@@ -112,63 +107,21 @@ const Button = ({
     }
   };
 
-  const styles = StyleSheet.create({
-    button: {
-      overflow: 'hidden',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 16, //16px
-      // borderWidth: 1,
-    },
-    smallButton: {
-      height: 32,
-      paddingHorizontal: 12,
-    },
-    mediumButton: {
-      height: 40,
-      paddingHorizontal: 16,
-    },
-    largeButton: {
-      height: 60,
-      paddingHorizontal: 20,
-    },
-    animatedContainer: {
-      flex: 1,
-      width: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    svgContainer: {
-      // ...StyleSheet.absoluteFillObject,
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-    },
-    contentContainer: {
-      flexDirection: 'row',
-      alignItems: 'center', // Vertically center the content
-      justifyContent: 'center', // Horizontally center the content
-      width: '100%', // Ensures the content takes full button width
-    },
-    svg: {
-      opacity: 0.5,
-      resizeMode: 'contain',
-    },
-    text: {
-      textAlign: 'center',
-      position: 'absolute',
-    },
-  });
-
   return (
     <Animated.View
       style={{
         transform: [{scale: animatedScale}],
+        borderRadius: 19,
+        overflow: 'hidden',
       }}>
-      <Animated.View
-        style={{
-          transform: [{scale: animatedScale}],
-        }}>
+      <RadialGradient
+        colors={
+          isPressed ? ['#313749', '#fff'] : ['transparent', 'transparent']
+        }
+        style={[styles.gradient, getButtonSize()]}
+        stops={[0, 0.7, 1]}
+        center={[100, 100]}
+        radius={400}>
         <TouchableHighlight
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
@@ -180,14 +133,12 @@ const Button = ({
               : variant === 'secondary'
               ? theme.colors.coolGrey[6]
               : theme.colors.coolGrey[3]
-          } // Custom fade color
+          }
           style={[
             styles.button,
-            getButtonSize(),
             {
               backgroundColor: getBackgroundColor(),
-              borderColor: getBorderColor(),
-              borderWidth: variant === 'tertiary' ? 1 : 0,
+              borderWidth: 0, // No border here as LinearGradient is used for border effect
             },
             style,
           ]}
@@ -210,9 +161,54 @@ const Button = ({
             </Text>
           </View>
         </TouchableHighlight>
-      </Animated.View>
+      </RadialGradient>
     </Animated.View>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 16,
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%',
+  },
+  gradient: {
+    borderRadius: 19,
+    padding: 2,
+  },
+  smallButton: {
+    height: 32,
+    width: 100,
+  },
+  mediumButton: {
+    height: 40,
+    width: 150,
+  },
+  largeButton: {
+    height: 60,
+    width: '100%',
+  },
+  contentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  svgContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  svg: {
+    opacity: 0.7,
+    resizeMode: 'contain',
+  },
+  text: {
+    textAlign: 'center',
+    position: 'absolute',
+  },
+});
 
 export default Button;

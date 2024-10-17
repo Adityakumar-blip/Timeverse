@@ -3,8 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen.js';
+import PrivateContainer from './views/Container/PrivateContainer.js';
+import PublicContainer from './views/Container/PublicContainer.js';
 
 const Stack = createStackNavigator();
 
@@ -31,12 +31,12 @@ export default function Navigation() {
           marginTop: 0,
         }}>
         {isAuthenticated ? (
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="private" component={PrivateContainer} />
         ) : (
           <Stack.Screen
-            name="Login"
+            name="public"
             options={{headerShown: false, headerMode: 'none'}}
-            component={HomeScreen}
+            component={PublicContainer}
           />
         )}
       </Stack.Navigator>

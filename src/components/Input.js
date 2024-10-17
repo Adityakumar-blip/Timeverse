@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
@@ -66,8 +67,7 @@ const TextArea = ({
   );
 };
 
-const OTPInput = ({length, onChange}) => {
-  console.log('length', length);
+const OTPInput = ({length, onChange, label}) => {
   const [otp, setOtp] = useState(Array(length).fill(''));
   const [focusedIndex, setFocusedIndex] = useState(null);
   const inputRefs = useRef(
@@ -151,27 +151,35 @@ const OTPInput = ({length, onChange}) => {
       borderBottomWidth: 2,
       borderBottomColor: theme.colors.coolGrey[10],
     },
+    labelText: {
+      fontFamily: theme.fontFamily.SUPL,
+      color: theme.colors.coolGrey['12'],
+      fontSize: theme.typography.paragraphXS.fontSize,
+    },
   });
 
   return (
-    <View style={styles.container}>
-      {otp.map((digit, index) => (
-        <TextInput
-          key={index}
-          style={[
-            styles.input,
-            focusedIndex === index && styles.focusedInput,
-            digit !== '' && styles.filledInput,
-          ]}
-          maxLength={1}
-          keyboardType="numeric"
-          onChangeText={text => handleOtpChange(text, index)}
-          onFocus={() => handleFocus(index)}
-          onBlur={handleBlur}
-          value={digit}
-          ref={inputRefs.current[index]}
-        />
-      ))}
+    <View>
+      {label && <Text style={styles.labelText}>{label}</Text>}
+      <View style={styles.container}>
+        {otp.map((digit, index) => (
+          <TextInput
+            key={index}
+            style={[
+              styles.input,
+              focusedIndex === index && styles.focusedInput,
+              digit !== '' && styles.filledInput,
+            ]}
+            maxLength={1}
+            keyboardType="numeric"
+            onChangeText={text => handleOtpChange(text, index)}
+            onFocus={() => handleFocus(index)}
+            onBlur={handleBlur}
+            value={digit}
+            ref={inputRefs.current[index]}
+          />
+        ))}
+      </View>
     </View>
   );
 };
@@ -183,6 +191,7 @@ const PhoneInput = ({
   success,
   onChange,
   countryCodes,
+  label,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
@@ -271,11 +280,18 @@ const PhoneInput = ({
       backgroundColor: 'transparent',
       zIndex: 999, // Just below the dropdown
     },
+    labelText: {
+      fontFamily: theme.fontFamily.SUPL,
+      color: theme.colors.coolGrey['12'],
+      fontSize: theme.typography.paragraphXS.fontSize,
+    },
   });
 
   return (
     <View style={{zIndex: 1}}>
       {/* Wrapper to contain dropdown */}
+      {label && <Text style={styles.labelText}>{label}</Text>}
+
       <TouchableWithoutFeedback onPress={() => setIsOpen(false)}>
         <View style={styles.container}>
           <View style={styles.pickerContainer}>
@@ -430,7 +446,7 @@ const InputField = ({
   }
 
   if (type === 'otp') {
-    return <OTPInput length={otpLength} onChange={onChange} />;
+    return <OTPInput length={otpLength} onChange={onChange} label={label} />;
   }
 
   if (type === 'phone') {
@@ -442,6 +458,7 @@ const InputField = ({
         success={success}
         onChange={onChange}
         countryCodes={countryCodes}
+        label={label}
       />
     );
   }
