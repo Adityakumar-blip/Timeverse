@@ -47,12 +47,10 @@ const MainView = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.backButton}>
-          {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
           <Text>Back</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>MainView</Text>
         <TouchableOpacity onPress={openModal} style={styles.iconButton}>
-          {/* <Ionicons name="md-menu" size={24} color="black" /> */}
           <Text style={{color: 'white'}}>+</Text>
         </TouchableOpacity>
       </View>

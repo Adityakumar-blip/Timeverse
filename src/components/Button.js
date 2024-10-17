@@ -1,18 +1,21 @@
+/* eslint-disable curly */
+/* eslint-disable react-native/no-inline-styles */
 import React, {useRef, useState} from 'react';
 import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  ImageBackground,
   Animated,
+  View,
+  TouchableHighlight,
 } from 'react-native';
 import {useTheme} from '../../utils/ThemeContext';
 
-// Import your pattern images
-import primaryPattern from '../assets/images/bg1.jpg';
-import secondaryPattern from '../assets/images/bg2.jpg';
-import outlinePattern from '../assets/images/bg1.jpg';
-import disabledPattern from '../assets/images/bg1.jpg';
+// Import your SVG strings
+import PrimarySvg from '../assets/svg/Pattern.svg';
+import SecondarySvg from '../assets/svg/Vector.svg';
+import SecondaryLight from '../assets/svg/Vector-light.svg';
+import PrimaryDark from '../assets/svg/Dark-Prime.svg';
 
 const Button = ({
   title,
@@ -24,19 +27,39 @@ const Button = ({
   textStyle,
   ...props
 }) => {
-  const {theme} = useTheme();
+  const {theme, isDarkMode} = useTheme();
   const [isPressed, setIsPressed] = useState(false);
   const animatedScale = useRef(new Animated.Value(1)).current;
 
-  const getBackgroundPattern = () => {
-    if (disabled) return disabledPattern;
+  const getBackgroundColor = () => {
+    if (disabled) return theme.colors.coolGrey[3];
     switch (variant) {
       case 'secondary':
-        return secondaryPattern;
-      case 'outline':
-        return outlinePattern;
+        return theme.colors.coolGrey[4];
+      case 'tertiary':
+        return isDarkMode ? '#000000' : '#FFFFFF';
       default:
-        return primaryPattern;
+        return theme.colors.coolGrey[12];
+    }
+  };
+
+  const getSvgPattern = () => {
+    if (disabled) return <SecondarySvg style={styles.svg} />;
+    switch (variant) {
+      case 'secondary':
+        return isDarkMode ? (
+          <SecondarySvg style={styles.svg} />
+        ) : (
+          <SecondarySvg style={styles.svg} />
+        );
+      case 'outline':
+        return <SecondarySvg style={styles.svg} />;
+      default:
+        return isDarkMode ? (
+          <PrimarySvg style={styles.svg} />
+        ) : (
+          <PrimarySvg style={styles.svg} />
+        );
     }
   };
 
@@ -44,16 +67,16 @@ const Button = ({
     if (disabled) return theme.colors.coolGrey[7];
     switch (variant) {
       case 'secondary':
-      case 'outline':
-        return theme.colors.primary;
+      case 'tertiary':
+        return theme.colors.coolGrey[12];
       default:
-        return theme.colors.background;
+        return theme.colors.coolGrey[1];
     }
   };
 
   const getBorderColor = () => {
     if (disabled) return theme.colors.coolGrey[5];
-    return variant === 'outline' ? theme.colors.primary : 'transparent';
+    return variant === 'tertiary' ? theme.colors.coolGrey[4] : 'transparent';
   };
 
   const getButtonSize = () => {
@@ -88,85 +111,108 @@ const Button = ({
       onPress();
     }
   };
+
+  const styles = StyleSheet.create({
+    button: {
+      overflow: 'hidden',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 16, //16px
+      // borderWidth: 1,
+    },
+    smallButton: {
+      height: 32,
+      paddingHorizontal: 12,
+    },
+    mediumButton: {
+      height: 40,
+      paddingHorizontal: 16,
+    },
+    largeButton: {
+      height: 60,
+      paddingHorizontal: 20,
+    },
+    animatedContainer: {
+      flex: 1,
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    svgContainer: {
+      // ...StyleSheet.absoluteFillObject,
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+    },
+    contentContainer: {
+      flexDirection: 'row',
+      alignItems: 'center', // Vertically center the content
+      justifyContent: 'center', // Horizontally center the content
+      width: '100%', // Ensures the content takes full button width
+    },
+    svg: {
+      opacity: 0.5,
+      resizeMode: 'contain',
+    },
+    text: {
+      textAlign: 'center',
+      position: 'absolute',
+    },
+  });
+
   return (
-    <TouchableOpacity
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
-      onPress={handlePress}
-      disabled={disabled}
-      style={[
-        styles.button,
-        getButtonSize(),
-        {
-          borderColor: getBorderColor(),
-          borderWidth: variant === 'outline' ? 1 : 0,
-        },
-        style,
-      ]}
-      {...props}>
+    <Animated.View
+      style={{
+        transform: [{scale: animatedScale}],
+      }}>
       <Animated.View
-        style={[
-          styles.animatedContainer,
-          {transform: [{scale: animatedScale}]},
-        ]}>
-        <ImageBackground
-          source={getBackgroundPattern()}
-          style={[styles.backgroundImage, styles.borderRadius]}
-          imageStyle={styles.borderRadius}
-          resizeMode="cover">
-          <Text
-            style={[
-              styles.text,
-              {
-                color: getTextColor(),
-                ...theme.typography.paragraphM,
-                fontWeight: theme.fontWeights.supreme.medium,
-              },
-              textStyle,
-            ]}>
-            {title}
-          </Text>
-        </ImageBackground>
+        style={{
+          transform: [{scale: animatedScale}],
+        }}>
+        <TouchableHighlight
+          onPressIn={handlePressIn}
+          onPressOut={handlePressOut}
+          onPress={handlePress}
+          disabled={disabled}
+          underlayColor={
+            variant === 'primary'
+              ? theme.colors.coolGrey[12]
+              : variant === 'secondary'
+              ? theme.colors.coolGrey[6]
+              : theme.colors.coolGrey[3]
+          } // Custom fade color
+          style={[
+            styles.button,
+            getButtonSize(),
+            {
+              backgroundColor: getBackgroundColor(),
+              borderColor: getBorderColor(),
+              borderWidth: variant === 'tertiary' ? 1 : 0,
+            },
+            style,
+          ]}
+          {...props}>
+          <View style={styles.contentContainer}>
+            {variant !== 'tertiary' && (
+              <View style={styles.svgContainer}>{getSvgPattern()}</View>
+            )}
+            <Text
+              style={[
+                styles.text,
+                {
+                  color: getTextColor(),
+                  ...theme.typography.paragraphM,
+                  fontFamily: theme.fontFamily.SUP,
+                },
+                textStyle,
+              ]}>
+              {title}
+            </Text>
+          </View>
+        </TouchableHighlight>
       </Animated.View>
-    </TouchableOpacity>
+    </Animated.View>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    overflow: 'hidden',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  borderRadius: {
-    borderRadius: 8,
-  },
-  smallButton: {
-    height: 32,
-    paddingHorizontal: 12,
-  },
-  mediumButton: {
-    height: 40,
-    paddingHorizontal: 16,
-  },
-  largeButton: {
-    height: 52,
-    paddingHorizontal: 20,
-  },
-  animatedContainer: {
-    flex: 1,
-    width: '100%',
-  },
-  backgroundImage: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  text: {
-    textAlign: 'center',
-  },
-});
 
 export default Button;

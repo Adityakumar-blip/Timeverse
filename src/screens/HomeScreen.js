@@ -1,12 +1,13 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/Ionicons'; // Import Ionicons from react-native-vector-icons
 import MainView from '../views/MainView';
 import ComponentView from '../views/ComponentView';
 import {useTheme} from '../../utils/ThemeContext';
 
 export default function HomeScreen({navigation}) {
-  const {theme, toggleTheme} = useTheme(); // Get theme and toggleTheme from ThemeContext
+  const {theme, toggleTheme, isDarkMode} = useTheme(); // Get isDarkMode from ThemeContext
 
   const handleLogout = async () => {
     await AsyncStorage.removeItem('userToken');
@@ -17,20 +18,20 @@ export default function HomeScreen({navigation}) {
   const dynamicStyles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.colors.coolGrey[1], // Use theme-based color
+      backgroundColor: theme.colors.coolGrey[1],
     },
     title: {
       fontSize: 20,
       marginBottom: 20,
-      color: theme.colors.textPrimary, // Dynamic text color based on theme
+      color: theme.colors.textPrimary,
     },
     button: {
-      backgroundColor: theme.colors.primary, // Use theme-based button color
+      backgroundColor: theme.colors.primary,
       padding: 10,
       borderRadius: 5,
     },
     buttonText: {
-      color: theme.colors.buttonText, // Dynamic button text color
+      color: theme.colors.buttonText,
       fontSize: 16,
     },
     header: {
@@ -49,31 +50,32 @@ export default function HomeScreen({navigation}) {
     headerTitle: {
       fontSize: 18,
       fontWeight: 'bold',
+      color: 'white',
     },
     iconButton: {
       padding: 10,
-      color: 'white',
     },
   });
 
   return (
     <View style={dynamicStyles.container}>
       <View style={dynamicStyles.header}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={dynamicStyles.backButton}>
-          <Text>Back</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <Text style={{color: 'white'}}>Back</Text>
         <Text style={dynamicStyles.headerTitle}>MainView</Text>
         <TouchableOpacity
           onPress={toggleTheme}
           style={dynamicStyles.iconButton}>
-          <Text style={{color: 'white'}}>+</Text>
+          <Icon
+            name={isDarkMode ? 'sunny-outline' : 'moon-outline'}
+            size={24}
+            color="white"
+          />
         </TouchableOpacity>
       </View>
-      {/* <Button title="Toggle Theme" /> */}
-      {/* Render your MainView or ComponentView */}
-      {/* <MainView /> */}
       <ComponentView />
     </View>
   );

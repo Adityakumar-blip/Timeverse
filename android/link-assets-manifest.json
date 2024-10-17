@@ -1,0 +1,97 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/ClashGrotesk-Bold.otf",
+      "sha1": "7e0a4dfecaf6dc11b831bcff9dfdca4815ff6bd3"
+    },
+    {
+      "path": "src/assets/fonts/ClashGrotesk-Extralight.otf",
+      "sha1": "1d5c72c7a3bed8f83f2b5de6506011f1725cad03"
+    },
+    {
+      "path": "src/assets/fonts/ClashGrotesk-Light.otf",
+      "sha1": "642cea1775b763e7497101de49efd631717a8b7b"
+    },
+    {
+      "path": "src/assets/fonts/ClashGrotesk-Medium.otf",
+      "sha1": "dacc45a62aeb471bf95e4b7ed5eb3c409f1829e3"
+    },
+    {
+      "path": "src/assets/fonts/ClashGrotesk-Regular.otf",
+      "sha1": "6025c9ee7fc14cdb0544a00ad9a224da38abfe98"
+    },
+    {
+      "path": "src/assets/fonts/ClashGrotesk-Semibold.otf",
+      "sha1": "d43b8e6d6ac119d9806f16ad7d62bf93caba82d5"
+    },
+    {
+      "path": "src/assets/fonts/ClashGrotesk-Variable.ttf",
+      "sha1": "b4bc066de0bbd47f84baf5f90d9739e13819c4ac"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Bold.otf",
+      "sha1": "c641dcff671b6a6277703a14fe6f9e848d2934f1"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-BoldItalic.otf",
+      "sha1": "ffb8116cd2604349cf7ae1f6877cde3cc6764c99"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Extrabold.otf",
+      "sha1": "75c6d170f1f3492c5e490372daf7f4bf0d63f0a2"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-ExtraboldItalic.otf",
+      "sha1": "725f157eeaa0a5b4a46f8fff67a7963c4c73e0f4"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Extralight.otf",
+      "sha1": "ee1600d0c49932d90fd9b845dfa00b6afe2bd510"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-ExtralightItalic.otf",
+      "sha1": "dfddfcb8ca305c90fbebee5867d3ddf1b0c4547e"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Italic.otf",
+      "sha1": "2a4305dc408f03da32fc6f0bbe68e6549491817f"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Light.otf",
+      "sha1": "2336cd7e1e198bc26399952e08f4a8ba03f95786"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-LightItalic.otf",
+      "sha1": "8ec7b633b7c96357d3d70777a389affa3c05300a"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Medium.otf",
+      "sha1": "f5391dd145c294ab3b31b00e6c3f933250273fd3"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-MediumItalic.otf",
+      "sha1": "f30e00c43c9aae0ef622dc833c0255842c50faae"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Regular.otf",
+      "sha1": "4ceacf00b15302917339c7425db71be1a29b8050"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Thin.otf",
+      "sha1": "3849f6d2e334aa1e1a7fb10f5d0b42f8e3a5a09a"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-ThinItalic.otf",
+      "sha1": "c450e5140ad491d883990632081461f7c1090cf2"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-Variable.ttf",
+      "sha1": "65f88953549060f168a267f754ef472027a56523"
+    },
+    {
+      "path": "src/assets/fonts/Supreme-VariableItalic.ttf",
+      "sha1": "b677275c02450ed0b6b2f1097706edae7b323126"
+    }
+  ]
+}
