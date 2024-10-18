@@ -9,16 +9,15 @@ import {
 } from 'react-native';
 import Button from '../../../components/Button';
 import InputField from '../../../components/Input';
-import {useTheme} from '../../../../utils/ThemeContext';
 import {useNavigation} from '@react-navigation/native';
-
+import {useTheme} from '../../../../utils/ThemeContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const AuraName = () => {
-  const {theme} = useTheme();
+const CreatePIN = () => {
   const navigation = useNavigation();
-
+  const {theme} = useTheme();
   const [isOtpScreen, setIsOtpScreen] = useState(false);
+  const [confirmPin, setConfirmPin] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handlePhoneSubmit = () => {
@@ -27,8 +26,16 @@ const AuraName = () => {
     }
   };
 
+  const handleSubmitOtp = () => {
+    navigation.navigate('create-aura');
+  };
+
   const handleBackPress = () => {
-    navigation.navigate('login');
+    setIsOtpScreen(false);
+  };
+
+  const handleOtpChange = otp => {
+    console.log('OTP entered:', otp);
   };
 
   const styles = StyleSheet.create({
@@ -106,30 +113,29 @@ const AuraName = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {isOtpScreen && <View style={styles.backContainer}></View>}
         <View style={styles.topContent}>
-          {isOtpScreen && (
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={handleBackPress}>
-              <Icon
-                name="arrow-back"
-                size={24}
-                color={theme.colors.coolGrey[12]}
-              />
-            </TouchableOpacity>
-          )}
-          <Text style={styles.heading}>Create Auraname</Text>
+          <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+            <Icon
+              name="arrow-back"
+              size={24}
+              color={theme.colors.coolGrey[12]}
+            />
+          </TouchableOpacity>
+
+          <Text style={styles.heading}>Create T-PIN</Text>
           <Text style={styles.subtitle}>
-            Give a unique name to your soul! Please try to create a unique
-            username for you
+            Please create yout Time Pin to send and receive time with your loved
+            ones
           </Text>
           <View style={styles.inputContainer}>
-            <InputField
-              placeholder="Ex. tesla"
-              trailingIcon={true}
-              label={'AURANAME'}
-            />
+            <View>
+              <InputField
+                type="otp"
+                otpLength={6}
+                onChange={handleOtpChange}
+                label="CREATE TIME PIN"
+              />
+            </View>
           </View>
         </View>
         <View style={styles.bottomContent}>
@@ -144,16 +150,15 @@ const AuraName = () => {
                 style={{
                   color: theme.colors.coolGrey[11],
                 }}>
-                Username -- Auraname
+                1M+ Trusted Users in 2030
               </Text>
             </View>
           </View>
           <Button
             title={'CONTINUE'}
-            variant="secondary"
+            variant="primary"
             size="large"
-            disabled={!phoneNumber && !isOtpScreen}
-            onPress={navigation.navigate('create-profile')}
+            onPress={confirmPin ? () => handleSubmitOtp() : handlePhoneSubmit}
           />
         </View>
       </View>
@@ -161,4 +166,4 @@ const AuraName = () => {
   );
 };
 
-export default AuraName;
+export default CreatePIN;
