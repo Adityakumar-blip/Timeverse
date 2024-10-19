@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -16,26 +15,38 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const CreatePIN = () => {
   const navigation = useNavigation();
   const {theme} = useTheme();
-  const [isOtpScreen, setIsOtpScreen] = useState(false);
-  const [confirmPin, setConfirmPin] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [step, setStep] = useState(1);
+  const [pin, setPin] = useState('');
+  const [confirmPin, setConfirmPin] = useState('');
 
-  const handlePhoneSubmit = () => {
-    if (phoneNumber) {
-      setIsOtpScreen(true);
+  const handlePinSubmit = () => {
+    if (step === 1 && pin.length === 6) {
+      setStep(2);
+    } else if (step === 2 && confirmPin.length === 6) {
+      if (pin === confirmPin) {
+        navigation.navigate('create-aura');
+      } else {
+        // Handle pin mismatch error
+        console.log('PINs do not match');
+      }
     }
   };
 
-  const handleSubmitOtp = () => {
-    navigation.navigate('create-aura');
-  };
-
   const handleBackPress = () => {
-    setIsOtpScreen(false);
+    if (step === 2) {
+      setStep(1);
+      setConfirmPin('');
+    } else {
+      navigation.goBack();
+    }
   };
 
-  const handleOtpChange = otp => {
-    console.log('OTP entered:', otp);
+  const handlePinChange = enteredPin => {
+    if (step === 1) {
+      setPin(enteredPin);
+    } else {
+      setConfirmPin(enteredPin);
+    }
   };
 
   const styles = StyleSheet.create({
@@ -51,7 +62,7 @@ const CreatePIN = () => {
     topContent: {
       flex: 1,
       justifyContent: 'center',
-      paddingBottom: isOtpScreen ? '80%' : '15%',
+      paddingBottom: '80%',
     },
     backContainer: {
       position: 'absolute',
@@ -122,18 +133,22 @@ const CreatePIN = () => {
             />
           </TouchableOpacity>
 
-          <Text style={styles.heading}>Create T-PIN</Text>
+          <Text style={styles.heading}>
+            {step === 1 ? 'Create T-PIN' : 'Confirm T-PIN'}
+          </Text>
           <Text style={styles.subtitle}>
-            Please create yout Time Pin to send and receive time with your loved
-            ones
+            {step === 1
+              ? 'Please create your Time Pin to send and receive time with your loved ones'
+              : 'Please confirm your Time Pin to send and receive time with your loved one’s'}
           </Text>
           <View style={styles.inputContainer}>
             <View>
               <InputField
                 type="otp"
                 otpLength={6}
-                onChange={handleOtpChange}
-                label="CREATE TIME PIN"
+                onChange={handlePinChange}
+                label={step === 1 ? 'CREATE TIME PIN' : 'CONFIRM TIME PIN'}
+                value={step === 1 ? pin : confirmPin}
               />
             </View>
           </View>
@@ -158,7 +173,8 @@ const CreatePIN = () => {
             title={'CONTINUE'}
             variant="primary"
             size="large"
-            onPress={confirmPin ? () => handleSubmitOtp() : handlePhoneSubmit}
+            disabled={pin.length !== 6}
+            onPress={handlePinSubmit}
           />
         </View>
       </View>

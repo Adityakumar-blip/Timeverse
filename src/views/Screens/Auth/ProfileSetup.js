@@ -57,7 +57,7 @@ const ProfileSetup = () => {
     topContent: {
       flex: 1,
       justifyContent: 'center',
-      paddingBottom: isOtpScreen ? '80%' : '15%',
+      paddingBottom: '40%',
     },
     backContainer: {
       position: 'absolute',
@@ -118,6 +118,7 @@ const ProfileSetup = () => {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
+      marginTop: 10,
     },
     genderP: {
       fontFamily: theme.fontFamily.SUPL,
@@ -144,6 +145,15 @@ const ProfileSetup = () => {
     image: {
       width: '100%',
       height: '100%',
+    },
+    pickerContainer: {
+      backgroundColor: theme.colors.coolGrey[1],
+      borderRadius: 120,
+      width: 40,
+      height: 40,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   });
 
@@ -183,32 +193,29 @@ const ProfileSetup = () => {
                 </View>
                 <Text>Upload a profile</Text>
               </View>
-              <TouchableOpacity onPress={() => handleProfileImage()}>
+              <TouchableOpacity
+                style={styles.pickerContainer}
+                onPress={() => handleProfileImage()}>
                 <Icon
                   name="image-outline"
-                  size={24}
+                  size={15}
                   color={theme.colors.coolGrey[12]}
                 />
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.inputContainer}>
+            <InputField placeholder="Ex. Nicole tesla" label={'FULL NAME'} />
             <InputField
-              placeholder="Ex. Nicole tesla"
-              trailingIcon={true}
-              label={'FULL NAME'}
-            />
-            <InputField
-              placeholder="Choose date of birth"
-              trailingIcon={true}
+              placeholder="Choose Birth Date"
               label={'DATE OF BIRTH'}
             />
             <View>
               <Text style={styles.genderP}>PICK YOUR GENDER</Text>
               <View style={styles.chipView}>
-                <Chip label="Male" onPress={() => {}} />
-                <Chip label="Female" onPress={() => {}} />
-                <Chip label="Others" onPress={() => {}} />
+                <Chip label="Male" onPress={() => {}} shape="full" />
+                <Chip label="Female" onPress={() => {}} shape="full" />
+                <Chip label="Others" onPress={() => {}} shape="full" />
               </View>
             </View>
           </View>

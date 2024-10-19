@@ -426,7 +426,7 @@ const InputField = ({
       color: theme.colors.coolGrey[10],
     },
     labelText: {
-      fontFamily: theme.fontFamily.SUP,
+      fontFamily: theme.fontFamily.SUPL,
       color: theme.colors.coolGrey['12'],
       fontSize: theme.typography.paragraphXS.fontSize,
     },

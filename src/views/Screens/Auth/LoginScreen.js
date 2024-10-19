@@ -21,12 +21,8 @@ const LoginScreen = () => {
 
   const handlePhoneSubmit = () => {
     if (phoneNumber) {
-      setIsOtpScreen(true);
+      navigation.navigate('otp-screen');
     }
-  };
-
-  const handleSubmitOtp = () => {
-    navigation.navigate('create-aura');
   };
 
   const handleBackPress = () => {
@@ -50,7 +46,7 @@ const LoginScreen = () => {
     topContent: {
       flex: 1,
       justifyContent: 'center',
-      paddingBottom: isOtpScreen ? '80%' : '15%',
+      paddingBottom: '30%',
     },
     backContainer: {
       position: 'absolute',
@@ -114,69 +110,24 @@ const LoginScreen = () => {
       <View style={styles.container}>
         {isOtpScreen && <View style={styles.backContainer}></View>}
         <View style={styles.topContent}>
-          {isOtpScreen && (
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={handleBackPress}>
-              <Icon
-                name="arrow-back"
-                size={24}
-                color={theme.colors.coolGrey[12]}
-              />
-            </TouchableOpacity>
-          )}
-          <Text style={styles.heading}>
-            {isOtpScreen ? 'Enter Security Code' : "Let's do Time Travel"}
-          </Text>
+          <Text style={styles.heading}>Let's do Time Travel</Text>
           <Text style={styles.subtitle}>
-            {isOtpScreen
-              ? 'Please enter the 6-digit code sent to your phone'
-              : 'To travel through Timeverse, Use your mobile number to continue'}
+            To travel through Timeverse, Use your mobile number to continue
           </Text>
           <View style={styles.inputContainer}>
-            {isOtpScreen ? (
-              <View>
-                <InputField
-                  type="otp"
-                  otpLength={6}
-                  onChange={handleOtpChange}
-                  label="ENTER OTP"
-                />
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                  }}>
-                  <Text style={{textAlign: 'center', marginTop: 15}}>
-                    Send a OTP to email
-                  </Text>
-                  <Text
-                    style={{
-                      paddingLeft: 10,
-                      textAlign: 'center',
-                      marginTop: 15,
-                      textDecorationStyle: 'solid',
-                    }}>
-                    Re-send Code
-                  </Text>
-                </View>
-              </View>
-            ) : (
-              <InputField
-                type="phone"
-                placeholder="Enter phone number"
-                countryCodes={[
-                  {name: 'United States', code: '+1'},
-                  {name: 'United Kingdom', code: '+44'},
-                ]}
-                onChange={({countryCode, phoneNumber}) => {
-                  console.log(countryCode, phoneNumber);
-                  setPhoneNumber(phoneNumber);
-                }}
-                label="Mobile Number"
-              />
-            )}
+            <InputField
+              type="phone"
+              placeholder="Enter phone number"
+              countryCodes={[
+                {name: 'United States', code: '+1'},
+                {name: 'United Kingdom', code: '+44'},
+              ]}
+              onChange={({countryCode, phoneNumber}) => {
+                console.log(countryCode, phoneNumber);
+                setPhoneNumber(phoneNumber);
+              }}
+              label="Mobile Number"
+            />
           </View>
         </View>
         <View style={styles.bottomContent}>
@@ -196,11 +147,11 @@ const LoginScreen = () => {
             </View>
           </View>
           <Button
-            title={isOtpScreen ? 'VERIFY' : 'CONTINUE'}
-            variant="secondary"
+            title={'CONTINUE'}
+            variant="primary"
             size="large"
-            disabled={!phoneNumber && !isOtpScreen}
-            onPress={isOtpScreen ? () => handleSubmitOtp() : handlePhoneSubmit}
+            disabled={!phoneNumber}
+            onPress={() => handlePhoneSubmit()}
           />
         </View>
       </View>

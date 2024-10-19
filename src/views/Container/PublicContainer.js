@@ -5,6 +5,8 @@ import LoginScreen from '../Screens/Auth/LoginScreen';
 import AuraName from '../Screens/Auth/AuraName';
 import ProfileSetup from '../Screens/Auth/ProfileSetup';
 import CreatePIN from '../Screens/Auth/CreateTPIN';
+import OTPScreen from '../Screens/Auth/OTPScreen';
+import SplashScreen from '../Screens/SplashScreen';
 
 const PublicContainer = () => {
   const HomeStack = createStackNavigator();
@@ -15,9 +17,19 @@ const PublicContainer = () => {
         marginTop: 0,
       }}>
       <HomeStack.Screen
+        name="splash"
+        options={{headerShown: false, headerMode: 'none'}}
+        component={SplashScreen}
+      />
+      <HomeStack.Screen
         name="login"
         options={{headerShown: false, headerMode: 'none'}}
         component={LoginScreen}
+      />
+      <HomeStack.Screen
+        name="otp-screen"
+        options={{headerShown: false, headerMode: 'none'}}
+        component={OTPScreen}
       />
       <HomeStack.Screen
         name="create-aura"

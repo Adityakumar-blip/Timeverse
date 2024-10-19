@@ -9,17 +9,15 @@ import {
 } from 'react-native';
 import Button from '../../../components/Button';
 import InputField from '../../../components/Input';
-import {useTheme} from '../../../../utils/ThemeContext';
 import {useNavigation} from '@react-navigation/native';
-
+import {useTheme} from '../../../../utils/ThemeContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const AuraName = () => {
-  const {theme} = useTheme();
+const OTPScreen = () => {
   const navigation = useNavigation();
-
+  const {theme} = useTheme();
   const [isOtpScreen, setIsOtpScreen] = useState(false);
-  const [auraName, setAuraname] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const handlePhoneSubmit = () => {
     if (phoneNumber) {
@@ -27,8 +25,16 @@ const AuraName = () => {
     }
   };
 
+  const handleSubmitOtp = () => {
+    navigation.navigate('create-aura');
+  };
+
   const handleBackPress = () => {
     navigation.navigate('login');
+  };
+
+  const handleOtpChange = otp => {
+    console.log('OTP entered:', otp);
   };
 
   const styles = StyleSheet.create({
@@ -94,7 +100,7 @@ const AuraName = () => {
       fontFamily: theme.fontFamily.CGM,
       borderRadius: 100,
       height: theme.spacing['10L'],
-      // width: 219,
+      width: 219,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -106,7 +112,6 @@ const AuraName = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {isOtpScreen && <View style={styles.backContainer}></View>}
         <View style={styles.topContent}>
           <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
             <Icon
@@ -115,40 +120,61 @@ const AuraName = () => {
               color={theme.colors.coolGrey[12]}
             />
           </TouchableOpacity>
-
-          <Text style={styles.heading}>Create Auraname</Text>
+          <Text style={styles.heading}>Enter Security Code</Text>
           <Text style={styles.subtitle}>
-            Give a unique name to your soul! Please try to create a unique
-            username for you
+            Please enter your password in the below field
           </Text>
           <View style={styles.inputContainer}>
-            <InputField
-              placeholder="Ex. tesla"
-              label={'AURANAME'}
-              onChange={name => setAuraname(name)}
-            />
+            <View>
+              <InputField
+                type="otp"
+                otpLength={6}
+                onChange={handleOtpChange}
+                label="ENTER OTP"
+              />
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    marginTop: 15,
+                    fontFamily: theme.fontFamily.SUPL,
+                    color: theme.colors.coolGrey[10],
+                  }}>
+                  Send a OTP to email
+                </Text>
+                <Text
+                  style={{
+                    paddingLeft: 10,
+                    textAlign: 'center',
+                    marginTop: 15,
+                    textDecorationStyle: 'solid',
+                    fontFamily: theme.fontFamily.SUPL,
+                    color: theme.colors.coolGrey[12],
+                  }}>
+                  Re-send Code
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
         <View style={styles.bottomContent}>
           <View style={styles.trustContainer}>
             <View style={styles.trust}>
-              <Text
-                style={{
-                  color: theme.colors.coolGrey[11],
-                  textDecorationLine: 'line-through',
-                }}>
-                Username
-              </Text>
               <Icon
-                name={'arrow-forward-outline'}
-                size={15}
+                name={'checkmark-circle'}
+                size={20}
                 color={theme.colors.coolGrey[10]}
               />
               <Text
                 style={{
                   color: theme.colors.coolGrey[11],
                 }}>
-                Auraname ✨
+                1M+ Trusted Users in 2030
               </Text>
             </View>
           </View>
@@ -156,8 +182,7 @@ const AuraName = () => {
             title={'CONTINUE'}
             variant="primary"
             size="large"
-            disabled={!auraName}
-            onPress={() => navigation.navigate('create-profile')}
+            onPress={() => handleSubmitOtp()}
           />
         </View>
       </View>
@@ -165,4 +190,4 @@ const AuraName = () => {
   );
 };
 
-export default AuraName;
+export default OTPScreen;
