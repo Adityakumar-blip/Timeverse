@@ -32,7 +32,7 @@ const Button = ({
   const animatedScale = useRef(new Animated.Value(1)).current;
 
   const getBackgroundColor = () => {
-    if (disabled) return theme.colors.coolGrey[3];
+    if (disabled && variant === 'primary') return theme.colors.coolGrey[3];
     switch (variant) {
       case 'secondary':
         return theme.colors.coolGrey[4];
@@ -44,7 +44,7 @@ const Button = ({
   };
 
   const getSvgPattern = () => {
-    if (disabled) return <SecondarySvg style={styles.svg} />;
+    // if (disabled) return <SecondarySvg style={styles.svg} />;
     switch (variant) {
       case 'secondary':
         return isDarkMode ? (
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     width: 150,
   },
   largeButton: {
-    height: 60,
+    height: 70,
     width: '100%',
   },
   contentContainer: {

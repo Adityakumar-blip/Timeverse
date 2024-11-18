@@ -13,6 +13,7 @@ import {useTheme} from '../../../../utils/ThemeContext';
 import {useNavigation} from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import BackIcon from '../../../assets/svg/back-icon.svg';
 
 const AuraName = () => {
   const {theme} = useTheme();
@@ -70,7 +71,7 @@ const AuraName = () => {
     },
     subtitle: {
       color: theme.colors.coolGrey[10],
-      fontFamily: theme.fontFamily.CGL,
+      fontFamily: theme.fontFamily.SUPL,
       fontSize: theme.typography.paragraphS.fontSize,
       lineHeight: theme.typography.paragraphS.lineHeight,
       marginBottom: 20,
@@ -109,11 +110,7 @@ const AuraName = () => {
         {isOtpScreen && <View style={styles.backContainer}></View>}
         <View style={styles.topContent}>
           <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-            <Icon
-              name="arrow-back"
-              size={24}
-              color={theme.colors.coolGrey[12]}
-            />
+            <BackIcon />
           </TouchableOpacity>
 
           <Text style={styles.heading}>Create Auraname</Text>
@@ -134,7 +131,7 @@ const AuraName = () => {
             <View style={styles.trust}>
               <Text
                 style={{
-                  color: theme.colors.coolGrey[11],
+                  color: theme.colors.coolGrey[9],
                   textDecorationLine: 'line-through',
                 }}>
                 Username

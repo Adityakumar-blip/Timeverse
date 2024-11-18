@@ -139,7 +139,7 @@ const OTPInput = ({length, onChange, label}) => {
       borderRadius: 0,
       textAlign: 'center',
       fontSize: theme.typography.paragraphM.fontSize,
-      fontFamily: theme.fontFamily.CG,
+      fontFamily: theme.fontFamily.CGL,
       color: theme.colors.coolGrey[10],
     },
     focusedInput: {
@@ -155,6 +155,7 @@ const OTPInput = ({length, onChange, label}) => {
       fontFamily: theme.fontFamily.SUPL,
       color: theme.colors.coolGrey['12'],
       fontSize: theme.typography.paragraphXS.fontSize,
+      textTransform: 'uppercase',
     },
   });
 
@@ -284,6 +285,7 @@ const PhoneInput = ({
       fontFamily: theme.fontFamily.SUPL,
       color: theme.colors.coolGrey['12'],
       fontSize: theme.typography.paragraphXS.fontSize,
+      textTransform: 'uppercase',
     },
   });
 
@@ -429,6 +431,7 @@ const InputField = ({
       fontFamily: theme.fontFamily.SUPL,
       color: theme.colors.coolGrey['12'],
       fontSize: theme.typography.paragraphXS.fontSize,
+      textTransform: 'uppercase',
     },
   });
 
@@ -502,7 +505,7 @@ const InputField = ({
               ? theme.colors.green[10]
               : disabled
               ? theme.colors.coolGrey[7]
-              : theme.colors.coolGrey[10]
+              : theme.colors.coolGrey[8]
           }
           onChangeText={handleChange}
           value={value}

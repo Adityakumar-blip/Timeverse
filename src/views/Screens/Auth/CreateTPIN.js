@@ -12,6 +12,8 @@ import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '../../../../utils/ThemeContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import BackIcon from '../../../assets/svg/back-icon.svg';
+
 const CreatePIN = () => {
   const navigation = useNavigation();
   const {theme} = useTheme();
@@ -88,7 +90,7 @@ const CreatePIN = () => {
     },
     subtitle: {
       color: theme.colors.coolGrey[10],
-      fontFamily: theme.fontFamily.CGL,
+      fontFamily: theme.fontFamily.SUPL,
       fontSize: theme.typography.paragraphS.fontSize,
       lineHeight: theme.typography.paragraphS.lineHeight,
       marginBottom: 20,
@@ -109,7 +111,7 @@ const CreatePIN = () => {
       paddingVertical: theme.spacing['1XXXS'],
       paddingHorizontal: theme.spacing['2XXS'],
       color: theme.colors.coolGrey[11],
-      fontFamily: theme.fontFamily.CGM,
+      fontFamily: theme.fontFamily.CGEL,
       borderRadius: 100,
       height: theme.spacing['10L'],
       width: 219,
@@ -126,11 +128,12 @@ const CreatePIN = () => {
       <View style={styles.container}>
         <View style={styles.topContent}>
           <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-            <Icon
+            {/* <Icon
               name="arrow-back"
               size={24}
               color={theme.colors.coolGrey[12]}
-            />
+            /> */}
+            <BackIcon />
           </TouchableOpacity>
 
           <Text style={styles.heading}>
@@ -164,6 +167,7 @@ const CreatePIN = () => {
               <Text
                 style={{
                   color: theme.colors.coolGrey[11],
+                  fontFamily: theme.fontFamily.CGL,
                 }}>
                 1M+ Trusted Users in 2030
               </Text>

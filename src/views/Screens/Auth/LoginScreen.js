@@ -12,6 +12,7 @@ import InputField from '../../../components/Input';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '../../../../utils/ThemeContext';
 import Icon from 'react-native-vector-icons/Ionicons';
+import backIcon from '../../../assets/svg/back-icon.svg';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -72,7 +73,7 @@ const LoginScreen = () => {
     },
     subtitle: {
       color: theme.colors.coolGrey[10],
-      fontFamily: theme.fontFamily.CGL,
+      fontFamily: theme.fontFamily.SUPL,
       fontSize: theme.typography.paragraphS.fontSize,
       lineHeight: theme.typography.paragraphS.lineHeight,
       marginBottom: 20,
@@ -93,7 +94,7 @@ const LoginScreen = () => {
       paddingVertical: theme.spacing['1XXXS'],
       paddingHorizontal: theme.spacing['2XXS'],
       color: theme.colors.coolGrey[11],
-      fontFamily: theme.fontFamily.CGM,
+      fontFamily: theme.fontFamily.CGEL,
       borderRadius: 100,
       height: theme.spacing['10L'],
       width: 219,
@@ -141,6 +142,7 @@ const LoginScreen = () => {
               <Text
                 style={{
                   color: theme.colors.coolGrey[11],
+                  fontFamily: theme.fontFamily.CGL,
                 }}>
                 1M+ Trusted Users in 2030
               </Text>

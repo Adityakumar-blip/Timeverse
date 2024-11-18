@@ -30,15 +30,19 @@ export default function Navigation() {
           headerStatusBarHeight: 0,
           marginTop: 0,
         }}>
-        {isAuthenticated ? (
-          <Stack.Screen name="private" component={PrivateContainer} />
-        ) : (
+        {/* {isAuthenticated ? ( */}
+        <Stack.Screen
+          options={{headerShown: false, headerMode: 'none'}}
+          name="private"
+          component={PrivateContainer}
+        />
+        {/* ) : (
           <Stack.Screen
             name="public"
             options={{headerShown: false, headerMode: 'none'}}
             component={PublicContainer}
           />
-        )}
+        )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );

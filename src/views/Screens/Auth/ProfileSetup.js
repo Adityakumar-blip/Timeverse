@@ -17,6 +17,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Chip from '../../../components/Chips';
 import {useImagePicker} from '../../../../hooks/useImagePicker';
 
+import BackIcon from '../../../assets/svg/back-icon.svg';
+
 const ProfileSetup = () => {
   const {theme} = useTheme();
   const imagePicker = useImagePicker();
@@ -83,7 +85,7 @@ const ProfileSetup = () => {
     },
     subtitle: {
       color: theme.colors.coolGrey[10],
-      fontFamily: theme.fontFamily.CGL,
+      fontFamily: theme.fontFamily.SUPL,
       fontSize: theme.typography.paragraphS.fontSize,
       lineHeight: theme.typography.paragraphS.lineHeight,
       marginBottom: 20,
@@ -129,16 +131,16 @@ const ProfileSetup = () => {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      borderWidth: 1,
+      borderWidth: 0,
       borderRadius: 100,
       padding: 12,
       backgroundColor: theme.colors.coolGrey[3],
       justifyContent: 'space-between',
-      height: 60,
+      height: 80,
     },
     imageContainer: {
-      width: 40,
-      height: 40,
+      width: 50,
+      height: 50,
       borderRadius: 25,
       overflow: 'hidden',
     },
@@ -149,11 +151,16 @@ const ProfileSetup = () => {
     pickerContainer: {
       backgroundColor: theme.colors.coolGrey[1],
       borderRadius: 120,
-      width: 40,
-      height: 40,
+      width: 50,
+      height: 50,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    profileText: {
+      fontSize: theme.typography.h6.fontSize,
+      fontFamily: theme.fontFamily.CGM,
+      color: theme.colors.coolGrey[11],
     },
   });
 
@@ -162,11 +169,7 @@ const ProfileSetup = () => {
       <View style={styles.container}>
         <View style={styles.topContent}>
           <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-            <Icon
-              name="arrow-back"
-              size={24}
-              color={theme.colors.coolGrey[12]}
-            />
+            <BackIcon />
           </TouchableOpacity>
 
           <Text style={styles.heading}>Let's Setup Your Profile</Text>
@@ -191,14 +194,14 @@ const ProfileSetup = () => {
                     style={styles.image}
                   />
                 </View>
-                <Text>Upload a profile</Text>
+                <Text style={styles.profileText}>Upload a profile</Text>
               </View>
               <TouchableOpacity
                 style={styles.pickerContainer}
                 onPress={() => handleProfileImage()}>
                 <Icon
                   name="image-outline"
-                  size={15}
+                  size={20}
                   color={theme.colors.coolGrey[12]}
                 />
               </TouchableOpacity>

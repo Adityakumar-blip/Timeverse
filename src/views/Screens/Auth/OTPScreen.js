@@ -12,6 +12,7 @@ import InputField from '../../../components/Input';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '../../../../utils/ThemeContext';
 import Icon from 'react-native-vector-icons/Ionicons';
+import BackIcon from '../../../assets/svg/back-icon.svg';
 
 const OTPScreen = () => {
   const navigation = useNavigation();
@@ -76,7 +77,7 @@ const OTPScreen = () => {
     },
     subtitle: {
       color: theme.colors.coolGrey[10],
-      fontFamily: theme.fontFamily.CGL,
+      fontFamily: theme.fontFamily.SUPL,
       fontSize: theme.typography.paragraphS.fontSize,
       lineHeight: theme.typography.paragraphS.lineHeight,
       marginBottom: 20,
@@ -114,11 +115,7 @@ const OTPScreen = () => {
       <View style={styles.container}>
         <View style={styles.topContent}>
           <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-            <Icon
-              name="arrow-back"
-              size={24}
-              color={theme.colors.coolGrey[12]}
-            />
+            <BackIcon />
           </TouchableOpacity>
           <Text style={styles.heading}>Enter Security Code</Text>
           <Text style={styles.subtitle}>
@@ -137,6 +134,7 @@ const OTPScreen = () => {
                   display: 'flex',
                   flexDirection: 'row',
                   justifyContent: 'center',
+                  marginTop: theme.spacing['9XXXB'],
                 }}>
                 <Text
                   style={{
@@ -173,6 +171,7 @@ const OTPScreen = () => {
               <Text
                 style={{
                   color: theme.colors.coolGrey[11],
+                  fontFamily: theme.fontFamily.CGM,
                 }}>
                 1M+ Trusted Users in 2030
               </Text>
