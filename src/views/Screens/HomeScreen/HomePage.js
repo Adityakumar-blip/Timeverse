@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
@@ -9,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import {useTheme} from '../../../../utils/ThemeContext';
+import Feather from 'react-native-vector-icons/Feather';
 
 import QRCode from '../../../assets/svg/qrcode.svg';
 import ToMobile from '../../../assets/svg/ToMobile.svg';
@@ -91,10 +93,68 @@ const HomePage = () => {
     {id: 6, status: '', name: 'Naren Kumar', duration: '234 Mins'},
   ];
 
+  const userData = [
+    {
+      id: '1',
+      name: 'Colleen',
+      image: '',
+      color: '#FF69B4',
+    },
+    {id: '2', name: 'Theresa', image: null, color: '#4169E1'},
+    {id: '3', name: 'Irma', image: null, color: '#FF69B4'},
+    {
+      id: '4',
+      name: 'Kathryn',
+      image: '',
+      color: '#87CEEB',
+    },
+    {id: '5', name: 'Audrey', image: null, color: '#4169E1'},
+    {id: '6', name: 'Jane', image: null, color: '#FF69B4'},
+    {
+      id: '7',
+      name: 'Serenity',
+      image: '',
+      color: '#32CD32',
+    },
+    {id: '8', name: 'Aubrey', image: null, color: '#4169E1'},
+    {id: '9', name: 'Bessie', image: null, color: '#32CD32'},
+    {
+      id: '10',
+      name: 'Esther',
+      image: '',
+      color: '#FFD700',
+    },
+    {
+      id: '11',
+      name: 'Bessie',
+      image: '',
+      color: '#4169E1',
+    },
+    {id: '12', name: 'Dianne', image: null, color: '#FF0000'},
+  ];
+
+  const GridItem = ({item}) => (
+    <View style={styles.itemContainer}>
+      {item.image ? (
+        <Image source={item.image} style={styles.avatar} />
+      ) : (
+        <View style={[styles.placeholderAvatar, {backgroundColor: item.color}]}>
+          <Image
+            source={{
+              uri: 'https://cdn-icons-png.flaticon.com/128/3336/3336008.png',
+            }}
+            style={styles.planetIcon}
+          />
+        </View>
+      )}
+      <Text style={styles.name}>{item.name}</Text>
+    </View>
+  );
+
   const styles = StyleSheet.create({
     container: {
       padding: 16,
-      backgroundColor: 'black',
+      backgroundColor: isDarkMode ? 'black' : 'white',
       height: '100%',
     },
     mainHeader: {
@@ -138,6 +198,7 @@ const HomePage = () => {
     requestsTitle: {
       fontFamily: theme.fontFamily.SUPM,
       fontSize: theme.typography.paragraphS.fontSize,
+      color: theme.colors.coolGrey['10'],
     },
     callContainer: {
       marginTop: 50,
@@ -169,10 +230,12 @@ const HomePage = () => {
     callTitle: {
       fontFamily: theme.fontFamily.CGM,
       fontSize: theme.typography.paragraphL.fontSize,
+      color: theme.colors.coolGrey['12'],
     },
     callTimestamp: {
       fontFamily: theme.fontFamily.SUPM,
       fontSize: theme.typography.paragraphS.fontSize,
+      color: theme.colors.coolGrey['12'],
     },
     moreContainer: {
       backgroundColor: theme.colors.coolGrey['3'],
@@ -184,6 +247,48 @@ const HomePage = () => {
     },
     moreTexts: {
       fontFamily: theme.fontFamily.SUPM,
+      fontSize: theme.typography.paragraphS.fontSize,
+    },
+    people: {
+      fontFamily: theme.fontFamily.SUPB,
+      fontSize: theme.typography.paragraphS.fontSize,
+
+      color: theme.colors.coolGrey['10'],
+    },
+    gridContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      marginTop: 20,
+      paddingHorizontal: 0,
+      marginBottom: 20,
+    },
+    itemContainer: {
+      width: '25%',
+      alignItems: 'center',
+      padding: 5,
+      marginTop: 20,
+    },
+    avatar: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+    },
+    placeholderAvatar: {
+      width: 70,
+      height: 70,
+      borderRadius: 100,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    planetIcon: {
+      width: 30,
+      height: 30,
+      tintColor: '#FFFFFF',
+    },
+    name: {
+      color: theme.colors.coolGrey['11'],
+      marginTop: 16,
+      fontFamily: theme.fontFamily.CGM,
       fontSize: theme.typography.paragraphS.fontSize,
     },
   });
@@ -217,9 +322,27 @@ const HomePage = () => {
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         {homeOptions.map((item, index) => (
           <View style={styles.parent} key={item.id}>
-            <TouchableOpacity style={styles.iconContainer}>
-              {item.icon}
-            </TouchableOpacity>
+            {item.id === 4 ? (
+              <TouchableOpacity style={styles.iconContainer}>
+                <View
+                  style={{
+                    backgroundColor: theme.colors.coolGrey['12'],
+                    borderRadius: 50,
+                    padding: 2,
+                  }}>
+                  <Feather
+                    name="plus"
+                    size={20}
+                    color={isDarkMode ? 'black' : 'white'}
+                  />
+                </View>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.iconContainer}>
+                {item.icon}
+              </TouchableOpacity>
+            )}
+
             <Text style={styles.iconTitle}>{item.title}</Text>
           </View>
         ))}
@@ -248,7 +371,11 @@ const HomePage = () => {
                 <Cross />
               </TouchableOpacity>
               <TouchableOpacity style={styles.checkContainer}>
-                <Check />
+                <Feather
+                  name="check"
+                  size={20}
+                  color={isDarkMode ? 'black' : 'white'}
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -269,6 +396,15 @@ const HomePage = () => {
             </View>
           </View>
         )}
+      </View>
+
+      <View>
+        <Text style={styles.people}>YOUR PEOPLE</Text>
+        <View style={styles.gridContainer}>
+          {userData.map(item => (
+            <GridItem key={item.id} item={item} />
+          ))}
+        </View>
       </View>
     </ScrollView>
   );

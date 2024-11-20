@@ -57,17 +57,45 @@ const AgendaScreen = ({viewType}) => {
     setEvents(newEvents);
   };
 
+  // const renderTimeSlots = () => {
+  //   return (
+  //     <View style={styles.timeColumn}>
+  //       {Array.from({length: 24}).map((_, index) => (
+  //         <View key={index} style={styles.timeSlot}>
+  //           <Text style={styles.timeSlotText}>{`${index
+  //             .toString()
+  //             .padStart(2, '0')}:00`}</Text>
+  //         </View>
+  //       ))}
+  //     </View>
+  //   );
+  // };
+
   const renderTimeSlots = () => {
     return (
-      <View style={styles.timeColumn}>
+      <>
+        <View style={styles.timeColumn}>
+          {Array.from({length: 24}).map((_, index) => (
+            <View key={index} style={styles.timeSlot}>
+              <Text style={styles.timeSlotText}>{`${index
+                .toString()
+                .padStart(2, '0')}:00`}</Text>
+            </View>
+          ))}
+        </View>
+        {/* Render horizontal lines */}
         {Array.from({length: 24}).map((_, index) => (
-          <View key={index} style={styles.timeSlot}>
-            <Text style={styles.timeSlotText}>{`${index
-              .toString()
-              .padStart(2, '0')}:00`}</Text>
-          </View>
+          <View
+            key={`line-${index}`}
+            style={[
+              styles.timeSlotLine,
+              {
+                top: index * 60, // Position based on timeSlot height
+              },
+            ]}
+          />
         ))}
-      </View>
+      </>
     );
   };
 
@@ -105,19 +133,30 @@ const AgendaScreen = ({viewType}) => {
   const renderDateColumn = date => {
     const isToday = date.isSame(moment(), 'day');
     const isSelected = date.isSame(selectedDate, 'day');
+    const hasEvents = events[date.format('YYYY-MM-DD')]?.length > 0;
 
     return (
       <TouchableOpacity
         key={date.format('YYYY-MM-DD')}
-        style={[
-          styles.dateColumn,
-          {width: `${100 / viewType}%`},
-          isToday && styles.todayColumn,
-          isSelected && styles.selectedColumn,
-        ]}
+        style={[styles.dateColumn, {width: `${100 / viewType}%`}]}
         onPress={() => setSelectedDate(date)}>
-        <Text style={styles.dayName}>{date.format('ddd')}</Text>
-        <Text style={styles.dayDate}>{date.format('D')}</Text>
+        <Text style={styles.dayName}>{date.format('ddd').toUpperCase()}</Text>
+        <View style={isSelected ? styles.selectedDate : null}>
+          <Text style={[styles.dayDate, isSelected && {color: '#000'}]}>
+            {date.format('D')}
+          </Text>
+        </View>
+        {hasEvents && (
+          <View
+            style={{
+              width: 4,
+              height: 4,
+              borderRadius: 2,
+              backgroundColor: '#007AFF',
+              marginTop: 4,
+            }}
+          />
+        )}
       </TouchableOpacity>
     );
   };
@@ -142,10 +181,9 @@ const AgendaScreen = ({viewType}) => {
                   ]}
                   onPress={() => Alert.alert(event.title)}>
                   <Text style={styles.eventText}>{event.title}</Text>
-                  <Text
-                    style={
-                      styles.eventTime
-                    }>{`${event.start} - ${event.end}`}</Text>
+                  <Text style={styles.eventTime}>
+                    {`${event.start} - ${event.end}`}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -154,7 +192,6 @@ const AgendaScreen = ({viewType}) => {
       </View>
     );
   };
-
   const getEventTopPosition = start => {
     const [hours, minutes] = start.split(':').map(Number);
     return (hours * 60 + minutes) * (styles.timeSlot.height / 60);

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import {View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -5,6 +6,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import HomePage from '../Screens/HomeScreen/HomePage';
 import {useTheme} from '../../../utils/ThemeContext';
+import MainView from '../MainView';
 
 // Placeholder screens - replace with your actual screens
 const HomeScreen = () => (
@@ -119,7 +121,7 @@ const PrivateContainer = () => {
       />
       <Tab.Screen
         name="Calendar"
-        component={CalendarScreen}
+        component={MainView}
         options={{
           tabBarIcon: ({focused}) => (
             <CustomTabBarIcon

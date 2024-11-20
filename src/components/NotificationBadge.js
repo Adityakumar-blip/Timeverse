@@ -60,7 +60,7 @@ const NotificationBadge = ({
   return (
     <View style={styles.container}>
       {hasRequests ? (
-        <View>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <LinearGradient
             colors={[notifyColor, '#000000']}
             start={{x: 0, y: 0}}
@@ -71,7 +71,7 @@ const NotificationBadge = ({
                 width: size + borderWidth * 2,
                 height: size + borderWidth * 2,
                 borderRadius: (size + borderWidth * 2) / 2,
-                marginTop: 32, // Added to match the non-gradient version
+                marginTop: 32,
               },
             ]}>
             <View
