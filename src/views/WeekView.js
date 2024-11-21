@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {
@@ -15,11 +16,13 @@ import {
 import moment from 'moment';
 import {Calendar} from 'react-native-calendars';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTheme} from '../../utils/ThemeContext';
 
 const {width} = Dimensions.get('window');
 const WEEK_WIDTH = width;
 
 const AgendaScreen = ({viewType}) => {
+  const {theme, isDarkMode} = useTheme();
   const [events, setEvents] = useState({});
   const [selectedDate, setSelectedDate] = useState(moment());
   const [modalVisible, setModalVisible] = useState(false);
@@ -84,17 +87,22 @@ const AgendaScreen = ({viewType}) => {
           ))}
         </View>
         {/* Render horizontal lines */}
-        {Array.from({length: 24}).map((_, index) => (
-          <View
-            key={`line-${index}`}
-            style={[
-              styles.timeSlotLine,
-              {
-                top: index * 60, // Position based on timeSlot height
-              },
-            ]}
-          />
-        ))}
+        {Array.from({length: 24}).map(
+          (_, index) =>
+            index !== 0 && (
+              <View
+                key={`line-${index}`}
+                style={[
+                  styles.timeSlotHorizontalLine,
+                  {
+                    top: index * 60, // Position based on timeSlot height
+                    left: 50, // Align with the day columns, starting after time column
+                    width: '100%', // Span across all day columns
+                  },
+                ]}
+              />
+            ),
+        )}
       </>
     );
   };
@@ -141,7 +149,12 @@ const AgendaScreen = ({viewType}) => {
         style={[styles.dateColumn, {width: `${100 / viewType}%`}]}
         onPress={() => setSelectedDate(date)}>
         <Text style={styles.dayName}>{date.format('ddd').toUpperCase()}</Text>
-        <View style={isSelected ? styles.selectedDate : null}>
+        <View
+          style={
+            isSelected
+              ? styles.selectedDate
+              : {justifyContent: 'center', alignItems: 'center'}
+          }>
           <Text style={[styles.dayDate, isSelected && {color: '#000'}]}>
             {date.format('D')}
           </Text>
@@ -153,7 +166,7 @@ const AgendaScreen = ({viewType}) => {
               height: 4,
               borderRadius: 2,
               backgroundColor: '#007AFF',
-              marginTop: 4,
+              marginTop: isSelected ? 10 : 20,
             }}
           />
         )}
@@ -293,11 +306,207 @@ const AgendaScreen = ({viewType}) => {
   //   setCurrentIndex(newIndex);
   //   flatListRef.current.scrollToIndex({index: newIndex, animated: false});
   // };
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+    },
+    weekContainer: {
+      width: WEEK_WIDTH,
+    },
+    datesRow: {
+      flexDirection: 'row',
+      paddingLeft: 50,
+      backgroundColor: isDarkMode ? '#000' : '#fff',
+    },
+    timeSlotHorizontalLine: {
+      position: 'absolute',
+      height: 1,
+      backgroundColor: theme.colors.coolGrey['5'],
+      zIndex: 1,
+    },
 
+    dateColumn: {
+      flex: 1,
+      alignItems: 'center',
+      padding: 10,
+    },
+    todayColumn: {
+      backgroundColor: '#e6f3ff',
+    },
+    selectedColumn: {
+      backgroundColor: '#b3d9ff',
+    },
+    dayName: {
+      fontSize: 14,
+      fontWeight: 'bold',
+      marginBottom: 5,
+      color: theme.colors.coolGrey['10'],
+    },
+    selectedDate: {
+      backgroundColor: theme.colors.coolGrey['12'],
+      width: 32,
+      height: 32,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 50,
+    },
+    dayDate: {
+      fontSize: theme.typography.paragraphM.fontSize,
+      color: theme.colors.coolGrey['12'],
+      fontFamily: theme.fontFamily.SUPM,
+    },
+    timeGridContainer: {
+      flexDirection: 'row',
+      flex: 1,
+      backgroundColor: theme.colors.coolGrey['3'],
+    },
+    timeColumn: {
+      width: 50,
+      borderRightWidth: 1,
+      borderRightColor: theme.colors.coolGrey['5'],
+    },
+    dayColumnsContainer: {
+      flex: 1,
+      flexDirection: 'row',
+    },
+    dayColumn: {
+      flex: 1,
+      // borderLeftWidth: 1,
+      // borderLeftColor: '#eee',
+    },
+    timeSlot: {
+      height: 60,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.coolGrey['5'],
+    },
+    timeSlotText: {
+      fontSize: 12,
+      color: '#888',
+    },
+    eventsContainer: {
+      position: 'relative',
+      height: 24 * 60,
+    },
+    event: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      padding: 5,
+      backgroundColor: 'lightblue',
+      borderRadius: 3,
+      margin: 1,
+      zIndex: 999,
+    },
+    eventText: {
+      fontSize: 12,
+      fontWeight: 'bold',
+    },
+    eventTime: {
+      fontSize: 10,
+    },
+    addButton: {
+      position: 'absolute',
+      right: 30,
+      bottom: 30,
+      backgroundColor: 'indigo',
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      elevation: 5,
+    },
+    monthDisplay: {
+      padding: 10,
+      borderWidth: 1,
+      borderColor: '#ccc',
+      borderRadius: 5,
+      marginBottom: 10,
+      alignItems: 'center',
+    },
+    monthDisplayText: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: 'black',
+    },
+    calendarModalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    calendarModalContent: {
+      backgroundColor: 'white',
+      padding: 20,
+      borderRadius: 10,
+      width: '90%',
+    },
+    closeCalendarButton: {
+      marginTop: 10,
+      padding: 10,
+      backgroundColor: 'indigo',
+      borderRadius: 5,
+      alignItems: 'center',
+    },
+    closeCalendarButtonText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+    addButtonText: {
+      color: 'white',
+      fontSize: 30,
+    },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalContent: {
+      backgroundColor: 'white',
+      padding: 20,
+      borderRadius: 10,
+      width: '80%',
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: '#ccc',
+      borderRadius: 5,
+      padding: 10,
+      marginBottom: 10,
+    },
+    addEventButton: {
+      backgroundColor: 'indigo',
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+    },
+    addEventButtonText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+    viewTypeContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      marginBottom: 10,
+    },
+    viewTypeButton: {
+      padding: 10,
+      backgroundColor: 'indigo',
+      borderRadius: 5,
+    },
+    viewTypeText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+  });
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        {renderMonthDisplay()}
+        {/* {renderMonthDisplay()} */}
 
         {calendarVisible && renderCalendar()}
 
@@ -367,184 +576,5 @@ const AgendaScreen = ({viewType}) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  weekContainer: {
-    width: WEEK_WIDTH,
-  },
-  datesRow: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    marginLeft: 50,
-  },
-  dateColumn: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 10,
-  },
-  todayColumn: {
-    backgroundColor: '#e6f3ff',
-  },
-  selectedColumn: {
-    backgroundColor: '#b3d9ff',
-  },
-  dayName: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: 'black',
-  },
-  dayDate: {
-    fontSize: 16,
-    color: 'black',
-  },
-  timeGridContainer: {
-    flexDirection: 'row',
-    flex: 1,
-  },
-  timeColumn: {
-    width: 50,
-  },
-  dayColumnsContainer: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  dayColumn: {
-    flex: 1,
-    borderLeftWidth: 1,
-    borderLeftColor: '#eee',
-  },
-  timeSlot: {
-    height: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  timeSlotText: {
-    fontSize: 12,
-    color: '#888',
-  },
-  eventsContainer: {
-    position: 'relative',
-    height: 24 * 60, // 24 hours * 60 (height of each hour slot)
-  },
-  event: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    padding: 5,
-    backgroundColor: 'lightblue',
-    borderRadius: 3,
-    margin: 1,
-  },
-  eventText: {
-    fontSize: 12,
-    fontWeight: 'bold',
-  },
-  eventTime: {
-    fontSize: 10,
-  },
-  addButton: {
-    position: 'absolute',
-    right: 30,
-    bottom: 30,
-    backgroundColor: 'indigo',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-  },
-  monthDisplay: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    marginBottom: 10,
-    alignItems: 'center',
-  },
-  monthDisplayText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  calendarModalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  calendarModalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    width: '90%',
-  },
-  closeCalendarButton: {
-    marginTop: 10,
-    padding: 10,
-    backgroundColor: 'indigo',
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  closeCalendarButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  addButtonText: {
-    color: 'white',
-    fontSize: 30,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    width: '80%',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-  },
-  addEventButton: {
-    backgroundColor: 'indigo',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  addEventButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  viewTypeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 10,
-  },
-  viewTypeButton: {
-    padding: 10,
-    backgroundColor: 'indigo',
-    borderRadius: 5,
-  },
-  viewTypeText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-});
 
 export default AgendaScreen;
