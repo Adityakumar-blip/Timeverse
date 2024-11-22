@@ -21,7 +21,7 @@ import {useTheme} from '../../utils/ThemeContext';
 const {width} = Dimensions.get('window');
 const WEEK_WIDTH = width;
 
-const AgendaScreen = ({viewType}) => {
+const AgendaScreen = ({viewType, onDateChange}) => {
   const {theme, isDarkMode} = useTheme();
   const [events, setEvents] = useState({});
   const [selectedDate, setSelectedDate] = useState(moment());
@@ -44,17 +44,62 @@ const AgendaScreen = ({viewType}) => {
     const startOfWeek = date.clone().startOf('week');
     const endOfWeek = date.clone().endOf('week');
     const newEvents = {};
+    const today = moment().format('YYYY-MM-DD');
+    const nov26 = moment().date(26).format('YYYY-MM-DD');
 
+    // Add sample events for today
+    newEvents[today] = [
+      {
+        title: 'Morning Meeting',
+        start: '09:00',
+        end: '10:30',
+      },
+      {
+        title: 'Lunch with Team',
+        start: '12:00',
+        end: '13:00',
+      },
+      {
+        title: 'Project Review',
+        start: '14:30',
+        end: '16:00',
+      },
+      {
+        title: 'Client Call',
+        start: '16:30',
+        end: '17:30',
+      },
+    ];
+
+    // Add sample events for November 26th
+    newEvents[nov26] = [
+      {
+        title: 'Weekly Planning',
+        start: '10:00',
+        end: '11:30',
+      },
+      {
+        title: 'Team Workshop',
+        start: '13:30',
+        end: '15:00',
+      },
+      {
+        title: 'Product Demo',
+        start: '15:30',
+        end: '16:30',
+      },
+    ];
+
+    // Fill in other days of the week with empty arrays or minimal events
     for (
       let m = moment(startOfWeek);
       m.isSameOrBefore(endOfWeek);
       m.add(1, 'days')
     ) {
       const day = m.format('YYYY-MM-DD');
-      newEvents[day] = [
-        {title: 'Sample Event 1', start: '09:00', end: '10:30'},
-        {title: 'Sample Event 2', start: '14:00', end: '16:00'},
-      ];
+      if (!newEvents[day]) {
+        newEvents[day] = [];
+      }
     }
 
     setEvents(newEvents);
@@ -177,31 +222,37 @@ const AgendaScreen = ({viewType}) => {
   const renderDayColumns = days => {
     return (
       <View style={styles.dayColumnsContainer}>
+        {/* Background columns for visual separation */}
         {days.map(day => (
           <View
             key={day}
-            style={[styles.dayColumn, {width: `${100 / viewType}%`}]}>
-            <View style={styles.eventsContainer}>
-              {events[day]?.map((event, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={[
-                    styles.event,
-                    {
-                      top: getEventTopPosition(event.start),
-                      height: getEventHeight(event.start, event.end),
-                    },
-                  ]}
-                  onPress={() => Alert.alert(event.title)}>
-                  <Text style={styles.eventText}>{event.title}</Text>
-                  <Text style={styles.eventTime}>
-                    {`${event.start} - ${event.end}`}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
+            style={[styles.dayColumn, {width: `${100 / viewType}%`}]}
+          />
         ))}
+
+        {/* Events container that spans full width */}
+        <View style={styles.fullWidthEventsContainer}>
+          {events[selectedDate.format('YYYY-MM-DD')]?.map((event, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.event,
+                {
+                  top: getEventTopPosition(event.start),
+                  height: getEventHeight(event.start, event.end),
+                  width: '100%', // Make events span full width
+                  left: 0,
+                  right: 0,
+                },
+              ]}
+              onPress={() => Alert.alert(event.title)}>
+              <Text style={styles.eventText}>{event.title}</Text>
+              <Text style={styles.eventTime}>
+                {`${event.start} - ${event.end}`}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
     );
   };
@@ -307,6 +358,13 @@ const AgendaScreen = ({viewType}) => {
   //   flatListRef.current.scrollToIndex({index: newIndex, animated: false});
   // };
   const styles = StyleSheet.create({
+    fullWidthEventsContainer: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      height: 24 * 60,
+      zIndex: 2,
+    },
     container: {
       flex: 1,
       backgroundColor: '#fff',
@@ -316,7 +374,7 @@ const AgendaScreen = ({viewType}) => {
     },
     datesRow: {
       flexDirection: 'row',
-      paddingLeft: 50,
+      // paddingLeft: 50,
       backgroundColor: isDarkMode ? '#000' : '#fff',
     },
     timeSlotHorizontalLine: {
@@ -369,6 +427,7 @@ const AgendaScreen = ({viewType}) => {
     dayColumnsContainer: {
       flex: 1,
       flexDirection: 'row',
+      position: 'relative', // Add this to allow absolute positioning of events container
     },
     dayColumn: {
       flex: 1,
@@ -399,6 +458,7 @@ const AgendaScreen = ({viewType}) => {
       borderRadius: 3,
       margin: 1,
       zIndex: 999,
+      width: '100%',
     },
     eventText: {
       fontSize: 12,
@@ -503,6 +563,11 @@ const AgendaScreen = ({viewType}) => {
       fontWeight: 'bold',
     },
   });
+
+  useEffect(() => {
+    onDateChange(selectedDate.format('ddd D MMM YYYY'));
+  }, [selectedDate]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View>

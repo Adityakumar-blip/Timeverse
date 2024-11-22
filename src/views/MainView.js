@@ -18,7 +18,7 @@ import {useTheme} from '../../utils/ThemeContext';
 const MainView = ({navigation}) => {
   const {theme, isDarkMode} = useTheme();
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedType, setSelectedType] = useState(1);
+  const [selectedType, setSelectedType] = useState(7);
   const [selectedView, setSelectedView] = useState(7);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
@@ -48,6 +48,10 @@ const MainView = ({navigation}) => {
 
   const getYear = year => {
     setCurrentYear(year);
+  };
+
+  const getDate = date => {
+    setCurrentYear(date);
   };
 
   const styles = StyleSheet.create({
@@ -111,7 +115,6 @@ const MainView = ({navigation}) => {
     },
   });
 
-  
   return (
     <SafeAreaView style={styles.container}>
       {/* Custom Header */}
@@ -132,7 +135,10 @@ const MainView = ({navigation}) => {
         </View>
       ) : (
         <View style={{height: '100%'}}>
-          <AgendaScreen viewType={selectedType} />
+          <AgendaScreen
+            viewType={selectedType}
+            onDateChange={date => getDate(date)}
+          />
         </View>
       )}
 

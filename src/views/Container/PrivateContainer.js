@@ -7,6 +7,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import HomePage from '../Screens/HomeScreen/HomePage';
 import {useTheme} from '../../../utils/ThemeContext';
 import MainView from '../MainView';
+import VaultScreen from '../Screens/VaultScreen/VaultScreen';
+import {createStackNavigator} from '@react-navigation/stack';
+import TimeScreen from '../Screens/VaultScreen/TimeScreen';
+import ContactPage from '../Screens/HomeScreen/ContactPage';
+import SendTime from '../Screens/HomeScreen/SendTime';
 
 // Placeholder screens - replace with your actual screens
 const HomeScreen = () => (
@@ -53,18 +58,28 @@ const NotificationScreen = () => (
   />
 );
 
-const BagScreen = () => (
-  <View
-    style={{
-      flex: 1,
-      backgroundColor: '#fff',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  />
-);
-
 const Tab = createBottomTabNavigator();
+const VaultStack = createStackNavigator();
+const HomeStack = createStackNavigator();
+
+const VaultStackNavigation = () => {
+  return (
+    <VaultStack.Navigator screenOptions={{headerShown: false}}>
+      <VaultStack.Screen name="VaultMain" component={VaultScreen} />
+      <VaultStack.Screen name="time-screen" component={TimeScreen} />
+    </VaultStack.Navigator>
+  );
+};
+
+const HomeStackNavigation = () => {
+  return (
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
+      <HomeStack.Screen name="Home" component={HomePage} />
+      <HomeStack.Screen name="contact" component={ContactPage} />
+      <HomeStack.Screen name="send-time" component={SendTime} />
+    </HomeStack.Navigator>
+  );
+};
 
 const CustomTabBarIcon = ({focused, iconName, size = 15}) => {
   const {theme, isDarkMode} = useTheme();
@@ -112,7 +127,7 @@ const PrivateContainer = () => {
       }}>
       <Tab.Screen
         name="Home"
-        component={HomePage}
+        component={HomeStackNavigation}
         options={{
           tabBarIcon: ({focused}) => (
             <CustomTabBarIcon focused={focused} iconName="home" size={22} />
@@ -160,7 +175,7 @@ const PrivateContainer = () => {
       />
       <Tab.Screen
         name="Bag"
-        component={BagScreen}
+        component={VaultStackNavigation}
         options={{
           tabBarIcon: ({focused}) => (
             <CustomTabBarIcon

@@ -28,11 +28,13 @@ const StatusIcon = ({status}) => {
 const CallComponent = ({
   imageUrl = 'https://cdn.dribbble.com/userupload/5031237/file/original-6437dbbd67caf21a7b3db07edc026b34.png?resize=1024x768',
   status,
+  isStatus = true,
 }) => {
+  console.log('isStatus', isStatus);
   return (
     <View style={styles.container}>
       <Image source={{uri: imageUrl}} style={styles.profileImage} />
-      <StatusIcon status={status} />
+      {isStatus && <StatusIcon status={status} />}
     </View>
   );
 };

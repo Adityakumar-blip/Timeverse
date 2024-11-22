@@ -26,7 +26,7 @@ import CallComponent from '../../../components/CallComponent';
 import Cross from '../../../assets/svg/Cross.svg';
 import Check from '../../../assets/svg/Check.svg';
 import Redirect from '../../../assets/svg/Redirect.svg';
-const HomePage = () => {
+const HomePage = ({navigation}) => {
   const {isDarkMode, theme} = useTheme();
 
   const homeOptions = [
@@ -34,21 +34,25 @@ const HomePage = () => {
       id: 1,
       title: 'To Mobile',
       icon: <ToMobile />,
+      link: 'contact',
     },
     {
       id: 2,
       title: 'Aura ID',
       icon: <Aura />,
+      link: 'contact',
     },
     {
       id: 3,
       title: 'Scan QR',
       icon: <Scanner />,
+      link: 'contact',
     },
     {
       id: 4,
       title: 'Create',
       icon: <AddCircle />,
+      link: 'contact',
     },
   ];
 
@@ -323,7 +327,9 @@ const HomePage = () => {
         {homeOptions.map((item, index) => (
           <View style={styles.parent} key={item.id}>
             {item.id === 4 ? (
-              <TouchableOpacity style={styles.iconContainer}>
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={() => navigation.navigate(item.link)}>
                 <View
                   style={{
                     backgroundColor: theme.colors.coolGrey['12'],
@@ -338,7 +344,9 @@ const HomePage = () => {
                 </View>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.iconContainer}>
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={() => navigation.navigate(item.link)}>
                 {item.icon}
               </TouchableOpacity>
             )}
