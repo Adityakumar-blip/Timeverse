@@ -174,7 +174,7 @@ const ContactPage = ({navigation}) => {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.navigate('VaultMain')}>
+          onPress={() => navigation.navigate('Home')}>
           <Icon name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         <View style={styles.searchContainer}>

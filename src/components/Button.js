@@ -32,7 +32,7 @@ const Button = ({
   const animatedScale = useRef(new Animated.Value(1)).current;
 
   const getBackgroundColor = () => {
-    if (disabled && variant === 'primary') return theme.colors.coolGrey[3];
+    if (disabled && variant === 'primary') return theme.colors.coolGrey['12'];
     switch (variant) {
       case 'secondary':
         return theme.colors.coolGrey[4];
