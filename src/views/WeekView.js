@@ -193,14 +193,20 @@ const AgendaScreen = ({viewType, onDateChange}) => {
         key={date.format('YYYY-MM-DD')}
         style={[styles.dateColumn, {width: `${100 / viewType}%`}]}
         onPress={() => setSelectedDate(date)}>
-        <Text style={styles.dayName}>{date.format('ddd').toUpperCase()}</Text>
+        <Text style={styles.dayName}>
+          {date.format('ddd')[0].toUpperCase()}
+        </Text>
         <View
           style={
             isSelected
               ? styles.selectedDate
               : {justifyContent: 'center', alignItems: 'center'}
           }>
-          <Text style={[styles.dayDate, isSelected && {color: '#000'}]}>
+          <Text
+            style={[
+              styles.dayDate,
+              isSelected && {color: isDarkMode ? '#000' : '#fff'},
+            ]}>
             {date.format('D')}
           </Text>
         </View>

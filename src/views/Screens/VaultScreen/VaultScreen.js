@@ -113,7 +113,7 @@ const VaultScreen = ({navigation}) => {
       flexDirection: 'column',
       gap: 25,
       padding: 16,
-      backgroundColor: 'black',
+      backgroundColor: theme.colors.coolGrey['4'],
       borderTopWidth: 1,
       borderTopColor: theme.colors.coolGrey['4'],
     },
@@ -176,13 +176,17 @@ const VaultScreen = ({navigation}) => {
   return (
     <ScrollView>
       <LinearGradient
-        colors={[
-          '#441A3B', // Deep purple
-          '#2D1B30', // Mid purple
-          '#1A1B2E', // Dark blue
-          '#141B2E', // Deeper blue
-        ]}
-        locations={[0, 0.3, 0.7, 1]}
+        colors={
+          isDarkMode
+            ? [
+                '#441A3B', // Deep purple
+                '#2D1B30', // Mid purple
+                '#1A1B2E', // Dark blue
+                '#141B2E', // Deeper blue
+              ]
+            : ['#f2cbe0', '#f2cbe0', '#cbe2f3', '#f3e9f7']
+        }
+        locations={[0, 0.4, 0.9, 1]}
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
         style={styles.gradientContainer}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -14,9 +14,13 @@ import CalendarComponent from './MonthView';
 
 import Carousel from '../assets/svg/Carousel.svg';
 import {useTheme} from '../../utils/ThemeContext';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import BottomSheet from '../components/BottomSheet';
+// import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 
 const MainView = ({navigation}) => {
   const {theme, isDarkMode} = useTheme();
+  // const bottomSheet = useBottomSheet();
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedType, setSelectedType] = useState(7);
   const [selectedView, setSelectedView] = useState(7);
@@ -53,6 +57,13 @@ const MainView = ({navigation}) => {
   const getDate = date => {
     setCurrentYear(date);
   };
+
+  const bottomSheetRef = useRef(null);
+
+  // callbacks
+  const handleSheetChanges = useCallback(() => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
   const styles = StyleSheet.create({
     container: {
@@ -113,6 +124,24 @@ const MainView = ({navigation}) => {
       color: theme.colors.coolGrey['12'],
       fontSize: theme.typography.h6.fontSize,
     },
+    bottomContainer: {
+      flex: 1,
+      backgroundColor: 'grey',
+    },
+    contentContainer: {
+      flex: 1,
+      padding: 36,
+      alignItems: 'center',
+    },
+    option: {
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: '#ccc',
+    },
+    optionText: {
+      fontSize: 16,
+      color: 'black',
+    },
   });
 
   return (
@@ -143,11 +172,50 @@ const MainView = ({navigation}) => {
       )}
 
       {/* Modal */}
-      <ViewModal
+      {/* <ViewModal
         isModalVisible={isModalVisible}
         setModalVisible={setModalVisible}
         handleChange={onHandleChange}
-      />
+      /> */}
+      {/* <GestureHandlerRootView style={styles.bottomContainer}>
+        <BottomSheet ref={bottomSheetRef} onChange={handleSheetChanges}>
+          <BottomSheetView style={styles.contentContainer}>
+            <Text>Awesome 🎉</Text>
+          </BottomSheetView>
+        </BottomSheet>
+      </GestureHandlerRootView> */}
+      <BottomSheet
+        visible={isModalVisible}
+        onClose={() => setModalVisible(false)}
+        height="50%">
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.option}
+            onPress={() => onSelect('Daily Planner')}>
+            <Text style={styles.optionText}>Daily Planner</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.option}
+            onPress={() => onSelect('03 days')}>
+            <Text style={styles.optionText}>03 days</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.option}
+            onPress={() => onSelect('Week Days')}>
+            <Text style={styles.optionText}>Week Days</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.option}
+            onPress={() => onSelect('Week Ends')}>
+            <Text style={styles.optionText}>Week Ends</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.option}
+            onPress={() => onSelect('Yearly')}>
+            <Text style={styles.optionText}>Yearly</Text>
+          </TouchableOpacity>
+        </View>
+      </BottomSheet>
     </SafeAreaView>
   );
 };
