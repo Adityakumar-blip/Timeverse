@@ -1,13 +1,5 @@
 import React, {useCallback, useRef, useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  StyleSheet,
-  StatusBar,
-} from 'react-native';
-import ViewModal from './ViewModal';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import AgendaScreen from './WeekView';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CalendarComponent from './MonthView';
@@ -18,51 +10,43 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import BottomSheet from '../components/BottomSheet';
 // import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 
+import Cross from '../assets/svg/Cross.svg';
+import Button from '../components/Button';
+
+const VIEW_OPTIONS = [
+  {label: 'Daily Planner', value: 'Week', days: 7},
+  {label: '03 Days', value: '03 days', days: 3},
+  {label: 'Week Days', value: '5 days', days: 5},
+  {label: 'Week Ends', value: 'Week Ends', days: 2},
+  {label: 'Yearly', value: 'Monthly', days: 1},
+];
+
 const MainView = ({navigation}) => {
   const {theme, isDarkMode} = useTheme();
-  // const bottomSheet = useBottomSheet();
+
+  // State Management
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedType, setSelectedType] = useState(7);
-  const [selectedView, setSelectedView] = useState(7);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [selectedOption, setSelectedOption] = useState(VIEW_OPTIONS[0].value);
 
-  const openModal = () => {
-    console.log('heree');
-    setModalVisible(true);
-  };
+  // Handlers
+  const handleOptionPress = useCallback(option => {
+    setSelectedOption(option);
+  }, []);
 
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
-  //   console.log(isModalVisible);
-
-  const onHandleChange = type => {
-    console.log('type', type);
-    if (type === 'Week') {
-      setSelectedType(7);
-    } else if (type === 'Monthly') {
-      setSelectedType(1);
-    } else if (type === '5 Days') {
-      setSelectedType(5);
-    } else {
-      setSelectedType(3);
+  const onContinueClick = useCallback(() => {
+    const selectedView = VIEW_OPTIONS.find(
+      option => option.value === selectedOption,
+    );
+    if (selectedView) {
+      setSelectedType(selectedView.days);
+      setModalVisible(false);
     }
-  };
+  }, [selectedOption]);
 
-  const getYear = year => {
+  const updateYear = useCallback(year => {
     setCurrentYear(year);
-  };
-
-  const getDate = date => {
-    setCurrentYear(date);
-  };
-
-  const bottomSheetRef = useRef(null);
-
-  // callbacks
-  const handleSheetChanges = useCallback(() => {
-    console.log('handleSheetChanges', index);
   }, []);
 
   const styles = StyleSheet.create({
@@ -125,99 +109,140 @@ const MainView = ({navigation}) => {
       fontSize: theme.typography.h6.fontSize,
     },
     bottomContainer: {
-      flex: 1,
-      backgroundColor: 'grey',
+      backgroundColor: isDarkMode ? 'black' : 'white',
+      height: 'max-content',
+      width: '100%',
     },
-    contentContainer: {
-      flex: 1,
-      padding: 36,
+    bottomHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    crossButton: {
+      backgroundColor: theme.colors.coolGrey['4'],
+      padding: 18,
+      borderRadius: 10,
+    },
+    bottomHeading: {
+      fontFamily: theme.fontFamily.CGM,
+      fontSize: theme.typography.h4.fontSize,
+      color: theme.colors.coolGrey['12'],
+    },
+    bottomPara: {
+      fontFamily: theme.fontFamily.SUPM,
+      fontSize: theme.typography.paragraphS.fontSize,
+      color: theme.colors.coolGrey['10'],
+    },
+    optionsContainer: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      paddingVertical: 20,
+    },
+    optionButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: theme.colors.coolGrey['2'],
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      borderRadius: 10,
+      marginHorizontal: 8,
+      marginVertical: 8,
+      justifyContent: 'space-between',
+    },
+    radioButton: {
+      width: 20,
+      height: 20,
+      borderWidth: 2,
+      borderColor: theme.colors.coolGrey['12'],
+      borderRadius: 10,
+      marginRight: 10,
+      justifyContent: 'center',
       alignItems: 'center',
     },
-    option: {
-      paddingVertical: 12,
-      borderBottomWidth: 1,
-      borderBottomColor: '#ccc',
+    radioButtonInner: {
+      width: 12,
+      height: 12,
+      backgroundColor: theme.colors.coolGrey['12'],
+      borderRadius: 6,
     },
     optionText: {
       fontSize: 16,
-      color: 'black',
     },
   });
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Custom Header */}
+      {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
+        <TouchableOpacity>
           <Text style={styles.year}>{currentYear}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={openModal} style={styles.iconButton}>
+        <TouchableOpacity
+          onPress={() => setModalVisible(true)}
+          style={styles.iconButton}>
           <Carousel />
         </TouchableOpacity>
       </View>
 
       {/* Main Content */}
       {selectedType === 1 ? (
-        <View>
-          <CalendarComponent onYearChange={year => getYear(year)} />
-        </View>
+        <CalendarComponent onYearChange={updateYear} />
       ) : (
-        <View style={{height: '100%'}}>
-          <AgendaScreen
-            viewType={selectedType}
-            onDateChange={date => getDate(date)}
-          />
-        </View>
+        <AgendaScreen viewType={selectedType} onDateChange={updateYear} />
       )}
 
-      {/* Modal */}
-      {/* <ViewModal
-        isModalVisible={isModalVisible}
-        setModalVisible={setModalVisible}
-        handleChange={onHandleChange}
-      /> */}
-      {/* <GestureHandlerRootView style={styles.bottomContainer}>
-        <BottomSheet ref={bottomSheetRef} onChange={handleSheetChanges}>
-          <BottomSheetView style={styles.contentContainer}>
-            <Text>Awesome 🎉</Text>
-          </BottomSheetView>
-        </BottomSheet>
-      </GestureHandlerRootView> */}
+      {/* Bottom Sheet */}
       <BottomSheet
         visible={isModalVisible}
         onClose={() => setModalVisible(false)}
-        height="50%">
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.option}
-            onPress={() => onSelect('Daily Planner')}>
-            <Text style={styles.optionText}>Daily Planner</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.option}
-            onPress={() => onSelect('03 days')}>
-            <Text style={styles.optionText}>03 days</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.option}
-            onPress={() => onSelect('Week Days')}>
-            <Text style={styles.optionText}>Week Days</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.option}
-            onPress={() => onSelect('Week Ends')}>
-            <Text style={styles.optionText}>Week Ends</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.option}
-            onPress={() => onSelect('Yearly')}>
-            <Text style={styles.optionText}>Yearly</Text>
-          </TouchableOpacity>
+        title="Time Scale">
+        <View style={styles.bottomContainer}>
+          <View style={styles.bottomHeader}>
+            <View>
+              <Text style={styles.bottomHeading}>Time Scale</Text>
+              <Text style={styles.bottomPara}>Select your preferred view</Text>
+            </View>
+            <TouchableOpacity
+              style={styles.crossButton}
+              onPress={() => setModalVisible(false)}>
+              <Cross />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.optionsContainer}>
+            {VIEW_OPTIONS.map(option => (
+              <TouchableOpacity
+                key={option.value}
+                style={styles.optionButton}
+                onPress={() => handleOptionPress(option.value)}>
+                <Text style={styles.optionText}>{option.label}</Text>
+                <View
+                  style={[
+                    styles.radioButton,
+                    selectedOption === option.value && {
+                      borderColor: theme.colors.primary,
+                    },
+                  ]}>
+                  {selectedOption === option.value && (
+                    <View style={styles.radioButtonInner} />
+                  )}
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <Button
+            title="CONTINUE"
+            variant="primary"
+            size="large"
+            onPress={onContinueClick}
+          />
         </View>
       </BottomSheet>
     </SafeAreaView>
   );
 };
 
-export default MainView;
+export default React.memo(MainView);

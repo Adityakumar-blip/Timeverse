@@ -1,98 +1,84 @@
-import React, {useState, useRef} from 'react';
+import React from 'react';
 import {
-  View,
   Modal,
-  Animated,
+  View,
+  Text,
   TouchableOpacity,
-  Dimensions,
   StyleSheet,
-  PanResponder,
+  Dimensions,
+  TouchableWithoutFeedback,
 } from 'react-native';
+import {useTheme} from '../../utils/ThemeContext';
 
-const {height} = Dimensions.get('screen');
+const BottomSheet = ({visible, onClose, children, title}) => {
+  const {theme, isDarkMode} = useTheme();
 
-const BottomSheet = ({
-  visible,
-  onClose,
-  children,
-  height: sheetHeight = '50%',
-}) => {
-  const animatedValue = useRef(new Animated.Value(0)).current;
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: (event, gestureState) => {
-        if (gestureState.dy > 50) {
-          // Increased threshold for more deliberate swipe
-          Animated.timing(animatedValue, {
-            toValue: 1,
-            duration: 300,
-            useNativeDriver: true,
-          }).start(onClose);
-        }
-      },
-      onPanResponderRelease: (event, gestureState) => {
-        if (gestureState.dy > 50) {
-          onClose();
-        }
-      },
-    }),
-  ).current;
-
-  const animatedStyle = {
-    transform: [
-      {
-        translateY: animatedValue.interpolate({
-          inputRange: [0, 1],
-          outputRange: [height, 0],
-        }),
-      },
-    ],
-  };
-
+  const styles = StyleSheet.create({
+    overlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0,0,0,0.5)',
+      justifyContent: 'flex-end',
+    },
+    bottomSheet: {
+      backgroundColor: isDarkMode ? 'black' : 'white',
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      paddingHorizontal: 20,
+      paddingBottom: 20,
+      // maxHeight: Dimensions.get('window').height * 0.7,
+    },
+    handle: {
+      width: 40,
+      height: 5,
+      backgroundColor: '#E0E0E0',
+      borderRadius: 2.5,
+      alignSelf: 'center',
+      marginVertical: 10,
+    },
+    titleStyle: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginBottom: 15,
+    },
+    contentContainer: {
+      paddingVertical: 10,
+    },
+    closeButton: {
+      marginTop: 15,
+      padding: 10,
+      alignSelf: 'center',
+    },
+    closeButtonText: {
+      color: 'blue',
+      fontSize: 16,
+    },
+  });
   return (
     <Modal
-      transparent
-      visible={visible}
       animationType="slide"
+      transparent={true}
+      visible={visible}
       onRequestClose={onClose}>
-      <View style={styles.overlay} onTouchEnd={onClose}>
-        <Animated.View
-          style={[styles.bottomSheet, {height: sheetHeight}, animatedStyle]}
-          {...panResponder.panHandlers}>
-          <View style={styles.dragHandle} />
-          <View style={styles.contentContainer}>{children}</View>
-        </Animated.View>
-      </View>
+      <TouchableWithoutFeedback onPress={onClose}>
+        <View style={styles.overlay}>
+          <TouchableWithoutFeedback>
+            <View style={styles.bottomSheet}>
+              <View style={styles.handle} />
+
+              {/* {title && <Text style={styles.titleStyle}>{title}</Text>} */}
+
+              <View style={styles.contentContainer}>{children}</View>
+
+              {/* <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+                <Text style={styles.closeButtonText}>Close</Text>
+              </TouchableOpacity> */}
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'flex-end',
-  },
-  bottomSheet: {
-    backgroundColor: 'white', // Changed from red for better visibility
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingTop: 10,
-    paddingHorizontal: 15,
-  },
-  dragHandle: {
-    width: 40,
-    height: 5,
-    backgroundColor: '#ccc',
-    alignSelf: 'center',
-    borderRadius: 2.5,
-    marginVertical: 10,
-  },
-  contentContainer: {
-    flex: 1,
-  },
-});
 
 export default BottomSheet;
