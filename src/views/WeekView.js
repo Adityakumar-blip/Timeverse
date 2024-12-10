@@ -17,6 +17,7 @@ import moment from 'moment';
 import {Calendar} from 'react-native-calendars';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useTheme} from '../../utils/ThemeContext';
+import EventItem from '../components/EventItem';
 
 const {width} = Dimensions.get('window');
 const WEEK_WIDTH = width;
@@ -53,21 +54,25 @@ const AgendaScreen = ({viewType, onDateChange}) => {
         title: 'Morning Meeting',
         start: '09:00',
         end: '10:30',
+        type: 'team',
       },
       {
         title: 'Lunch with Team',
         start: '12:00',
         end: '13:00',
+        type: 'client',
       },
       {
         title: 'Project Review',
         start: '14:30',
         end: '16:00',
+        type: 'project',
       },
       {
         title: 'Client Call',
         start: '16:30',
         end: '17:30',
+        type: 'type2',
       },
     ];
 
@@ -239,24 +244,25 @@ const AgendaScreen = ({viewType, onDateChange}) => {
         {/* Events container that spans full width */}
         <View style={styles.fullWidthEventsContainer}>
           {events[selectedDate.format('YYYY-MM-DD')]?.map((event, index) => (
-            <TouchableOpacity
-              key={index}
-              style={[
-                styles.event,
-                {
-                  top: getEventTopPosition(event.start),
-                  height: getEventHeight(event.start, event.end),
-                  width: '100%', // Make events span full width
-                  left: 0,
-                  right: 0,
-                },
-              ]}
-              onPress={() => Alert.alert(event.title)}>
-              <Text style={styles.eventText}>{event.title}</Text>
-              <Text style={styles.eventTime}>
-                {`${event.start} - ${event.end}`}
-              </Text>
-            </TouchableOpacity>
+            // <TouchableOpacity
+            //   key={index}
+            //   style={[
+            //     styles.event,
+            //     {
+            //       top: getEventTopPosition(event.start),
+            //       height: getEventHeight(event.start, event.end),
+            //       width: '100%', // Make events span full width
+            //       left: 0,
+            //       right: 0,
+            //     },
+            //   ]}
+            //   onPress={() => Alert.alert(event.title)}>
+            //   <Text style={styles.eventText}>{event.title}</Text>
+            //   <Text style={styles.eventTime}>
+            //     {`${event.start} - ${event.end}`}
+            //   </Text>
+            // </TouchableOpacity>
+            <EventItem event={event} styles={styles} />
           ))}
         </View>
       </View>
@@ -455,24 +461,7 @@ const AgendaScreen = ({viewType, onDateChange}) => {
       position: 'relative',
       height: 24 * 60,
     },
-    event: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      padding: 5,
-      backgroundColor: 'lightblue',
-      borderRadius: 3,
-      margin: 1,
-      zIndex: 999,
-      width: '100%',
-    },
-    eventText: {
-      fontSize: 12,
-      fontWeight: 'bold',
-    },
-    eventTime: {
-      fontSize: 10,
-    },
+
     addButton: {
       position: 'absolute',
       right: 30,
@@ -598,11 +587,11 @@ const AgendaScreen = ({viewType, onDateChange}) => {
           onViewableItemsChanged={onViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
         />
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.addButton}
           onPress={() => setModalVisible(true)}>
           <Text style={styles.addButtonText}>+</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <Modal
           animationType="slide"
