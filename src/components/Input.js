@@ -23,6 +23,7 @@ const TextArea = ({
   success,
   onChange,
   numberOfLines = 4,
+  label,
 }) => {
   const {theme} = useTheme();
   const [value, setValue] = useState('');
@@ -42,28 +43,40 @@ const TextArea = ({
       color: disabled ? theme.colors.coolGrey[7] : theme.colors.coolGrey[10],
       backgroundColor: 'transparent',
       textAlignVertical: 'top',
+      marginBottom: 10,
+    },
+    labelText: {
+      fontFamily: theme.fontFamily.SUPM,
+      color: theme.colors.coolGrey['12'],
+      fontSize: theme.typography.paragraphXS.fontSize,
+      textTransform: 'uppercase',
+      marginBottom: 10,
     },
   });
 
   return (
-    <TextInput
-      style={styles.textArea}
-      multiline
-      numberOfLines={numberOfLines}
-      placeholder={placeholder}
-      placeholderTextColor={
-        error
-          ? theme.colors.red[10]
-          : success
-          ? theme.colors.green[10]
-          : disabled
-          ? theme.colors.coolGrey[7]
-          : theme.colors.coolGrey[10]
-      }
-      onChangeText={handleChange}
-      value={value}
-      editable={!disabled}
-    />
+    <View>
+      {label && <Text style={styles.labelText}>{label}</Text>}
+
+      <TextInput
+        style={styles.textArea}
+        multiline
+        numberOfLines={numberOfLines}
+        placeholder={placeholder}
+        placeholderTextColor={
+          error
+            ? theme.colors.red[10]
+            : success
+            ? theme.colors.green[10]
+            : disabled
+            ? theme.colors.coolGrey[7]
+            : theme.colors.coolGrey[10]
+        }
+        onChangeText={handleChange}
+        value={value}
+        editable={!disabled}
+      />
+    </View>
   );
 };
 
@@ -152,7 +165,7 @@ const OTPInput = ({length, onChange, label}) => {
       borderBottomColor: theme.colors.coolGrey[10],
     },
     labelText: {
-      fontFamily: theme.fontFamily.SUPL,
+      fontFamily: theme.fontFamily.SUPM,
       color: theme.colors.coolGrey['12'],
       fontSize: theme.typography.paragraphXS.fontSize,
       textTransform: 'uppercase',
@@ -282,7 +295,7 @@ const PhoneInput = ({
       zIndex: 999, // Just below the dropdown
     },
     labelText: {
-      fontFamily: theme.fontFamily.SUPL,
+      fontFamily: theme.fontFamily.SUPM,
       color: theme.colors.coolGrey['12'],
       fontSize: theme.typography.paragraphXS.fontSize,
       textTransform: 'uppercase',
@@ -428,7 +441,7 @@ const InputField = ({
       color: theme.colors.coolGrey[10],
     },
     labelText: {
-      fontFamily: theme.fontFamily.SUPL,
+      fontFamily: theme.fontFamily.SUPM,
       color: theme.colors.coolGrey['12'],
       fontSize: theme.typography.paragraphXS.fontSize,
       textTransform: 'uppercase',
@@ -444,6 +457,7 @@ const InputField = ({
         success={success}
         onChange={onChange}
         numberOfLines={numberOfLines}
+        label={label}
       />
     );
   }
@@ -478,13 +492,18 @@ const InputField = ({
       <View style={styles.container}>
         {leadingIcon && (
           <TouchableOpacity style={styles.iconContainer} disabled={disabled}>
-            <Icon
-              name={getIconName(leadingIcon)}
-              size={20}
-              color={getIconColor()}
-            />
+            {React.isValidElement(leadingIcon) ? (
+              leadingIcon
+            ) : (
+              <Icon
+                name={getIconName(leadingIcon)}
+                size={20}
+                color={getIconColor()}
+              />
+            )}
           </TouchableOpacity>
         )}
+
         <TextInput
           style={[
             styles.input,

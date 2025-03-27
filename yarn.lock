@@ -3435,6 +3435,7 @@ __metadata:
     prettier: 2.8.8
     react: 18.3.1
     react-native: 0.75.2
+    react-native-big-calendar: ^4.17.1
     react-native-calendars: ^1.1306.0
     react-native-gesture-handler: ^2.19.0
     react-native-image-picker: ^7.1.2
@@ -4049,6 +4050,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"calendarize@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "calendarize@npm:1.1.1"
+  checksum: a5326f762f0d4800ac92b978f24fb1d52ce37dbf730da8d5e7d7562e70df3f93a0cacc615245fb9b2a1f89e8f59030a715080d13fb4bd14c138d3678a85482c8
+  languageName: node
+  linkType: hard
+
 "call-bind@npm:^1.0.2, call-bind@npm:^1.0.5, call-bind@npm:^1.0.6, call-bind@npm:^1.0.7":
   version: 1.0.7
   resolution: "call-bind@npm:1.0.7"
@@ -4634,7 +4642,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.8.15":
+"dayjs@npm:^1.11.13, dayjs@npm:^1.8.15":
   version: 1.11.13
   resolution: "dayjs@npm:1.11.13"
   checksum: f388db88a6aa93956c1f6121644e783391c7b738b73dbc54485578736565c8931bdfba4bb94e9b1535c6e509c97d5deb918bbe1ae6b34358d994de735055cca9
@@ -8767,6 +8775,19 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
+  languageName: node
+  linkType: hard
+
+"react-native-big-calendar@npm:^4.17.1":
+  version: 4.17.1
+  resolution: "react-native-big-calendar@npm:4.17.1"
+  dependencies:
+    calendarize: ^1.1.1
+    dayjs: ^1.11.13
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: dcc68489d26f99e6526e85967cc9a1ada2ad8a06e7e17573782bf3e29bf3c2441c5e5aaf871e77e71280c31344b5b9cc4d53da23b41c2dc34d18940ea5c08547
   languageName: node
   linkType: hard
 

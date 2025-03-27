@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useTheme} from '../../utils/ThemeContext';
 
-const BottomSheet = ({visible, onClose, children, title}) => {
+const BottomSheet = ({visible, onClose, children, title, bgColor}) => {
   const {theme, isDarkMode} = useTheme();
 
   const styles = StyleSheet.create({
@@ -20,11 +20,11 @@ const BottomSheet = ({visible, onClose, children, title}) => {
       justifyContent: 'flex-end',
     },
     bottomSheet: {
-      backgroundColor: isDarkMode ? 'black' : 'white',
+      backgroundColor: bgColor ? bgColor : isDarkMode ? 'black' : 'white',
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
       paddingHorizontal: 20,
-      paddingBottom: 20,
+      // paddingBottom: 20,
       // maxHeight: Dimensions.get('window').height * 0.7,
     },
     handle: {

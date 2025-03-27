@@ -25,6 +25,7 @@ import WalletDarkFocused from '../../assets/svg/wallet-dark-focused.svg';
 import CalendarOutline from '../../assets/svg/wallet-outline.svg';
 import BellOutline from '../../assets/svg/bell-outline.svg';
 import WalletOutline from '../../assets/svg/wallet-outline.svg';
+import AddEvent from '../Screens/Calendar/AddEvent';
 // Placeholder screens - replace with your actual screens
 const HomeScreen = () => (
   <View
@@ -85,10 +86,19 @@ const VaultStackNavigation = () => {
 
 const HomeStackNavigation = () => {
   return (
-    <HomeStack.Navigator  screenOptions={{headerShown: false}}>
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
       <HomeStack.Screen name="Home" component={HomePage} />
       <HomeStack.Screen name="contact" component={ContactPage} />
       <HomeStack.Screen name="send-time" component={SendTime} />
+    </HomeStack.Navigator>
+  );
+};
+
+const CalendarStackNavigation = () => {
+  return (
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
+      <HomeStack.Screen name="MainView" component={MainView} />
+      <HomeStack.Screen name="add-event" component={AddEvent} />
     </HomeStack.Navigator>
   );
 };
@@ -235,7 +245,7 @@ const PrivateContainer = () => {
       />
       <Tab.Screen
         name="Calendar"
-        component={MainView}
+        component={CalendarStackNavigation}
         options={{
           tabBarIcon: ({focused}) => (
             <CustomTabBarIcon

@@ -22,7 +22,7 @@ import EventItem from '../components/EventItem';
 const {width} = Dimensions.get('window');
 const WEEK_WIDTH = width;
 
-const AgendaScreen = ({viewType, onDateChange}) => {
+const AgendaScreen = ({viewType, onDateChange, navigation}) => {
   const {theme, isDarkMode} = useTheme();
   const [events, setEvents] = useState({});
   const [selectedDate, setSelectedDate] = useState(moment());
@@ -587,11 +587,11 @@ const AgendaScreen = ({viewType, onDateChange}) => {
           onViewableItemsChanged={onViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
         />
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={styles.addButton}
-          onPress={() => setModalVisible(true)}>
+          onPress={() => navigation.navigate('add-event')}>
           <Text style={styles.addButtonText}>+</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
         <Modal
           animationType="slide"

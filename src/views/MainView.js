@@ -190,7 +190,11 @@ const MainView = ({navigation}) => {
       {selectedType === 1 ? (
         <CalendarComponent onYearChange={updateYear} />
       ) : (
-        <AgendaScreen viewType={selectedType} onDateChange={updateYear} />
+        <AgendaScreen
+          viewType={selectedType}
+          onDateChange={updateYear}
+          navigation={navigation}
+        />
       )}
 
       {/* Bottom Sheet */}
